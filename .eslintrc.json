@@ -1,0 +1,32 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": [
+        "airbnb-base",
+        "prettier"
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    // Only apply eslint rules to src directory.
+    "rules": {
+        "arrow-body-style": ["error", "always"],
+        "no-use-before-define": ["error", {
+            "functions": false,
+            "classes": true,
+            "variables": true,
+            "allowNamedExports": false
+        }],
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+              "devDependencies": false,
+              "optionalDependencies": false,
+              "peerDependencies": false,
+            }
+        ]
+    }
+}
