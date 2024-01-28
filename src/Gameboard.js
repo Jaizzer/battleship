@@ -15,6 +15,12 @@ export default class Gameboard {
 
     receiveAttack(x, y) {
         this.grid[x][y].isHit = true;
+
+        // Hit the ship that occupies the grid.
+        let isGridOccupied = this.grid[x][y].ship !== null;
+        if (isGridOccupied) {
+            this.grid[x][y].ship.hit();
+        }
     }
 
     placeShip(Ship, [initialRow, initialColumn]) {
