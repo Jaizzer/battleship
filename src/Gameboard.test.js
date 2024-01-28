@@ -71,7 +71,7 @@ test('Place ship method throws an error if a vertical ship is placed in an inval
     };
 
     // Use the expect statement with the wrapped function
-    expect(placeShipOperation).toThrow(/Invalid/);
+    expect(placeShipOperation).toThrow(/Invalid coordinates: Out of bounds/);
 });
 
 test('Place ship method throws an error if a horizontal ship is placed in an invalid coordinates ', () => {
