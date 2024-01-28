@@ -1,9 +1,9 @@
 export default class Gameboard {
-    constructor() {
+    constructor(size) {
         this.grid = [];
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < size; i++) {
             let row = [];
-            for (let j = 0; j < 10; j++) {
+            for (let j = 0; j < size; j++) {
                 row.push({ isHit: false, ship: null });
             }
             this.grid.push(row);
@@ -27,7 +27,7 @@ export default class Gameboard {
             }
 
             // Throw error if grid is out of bounds.
-            let isGridOutOfBounds = currentRow > 9 || currentColumn > 9;
+            let isGridOutOfBounds = currentRow >= this.grid.length || currentColumn >= this.grid.length;
             if (isGridOutOfBounds) {
                 throw new Error('Invalid coordinates: Out of bounds');
             }
@@ -52,7 +52,12 @@ export default class Gameboard {
 
             // Get all the valid coordinates (not out of bounds).
             adjacentGridsCoordinates = adjacentGridsCoordinates.filter(([gridCoordinateRow, gridCoordinateColumn]) => {
-                if (gridCoordinateRow >= 0 && gridCoordinateRow <= 9 && gridCoordinateColumn >= 0 && gridCoordinateColumn <= 9) {
+                if (
+                    gridCoordinateRow >= 0 &&
+                    gridCoordinateRow < this.grid.length &&
+                    gridCoordinateColumn >= 0 &&
+                    gridCoordinateColumn < this.grid.length
+                ) {
                     return true;
                 }
                 return false;

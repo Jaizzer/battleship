@@ -2,7 +2,8 @@ import Gameboard from './Gameboard';
 import Ship from './Ship';
 
 test('Unhit grids will have a false "isHit" value', () => {
-    const gameboard = new Gameboard();
+    const boardSize = 10;
+    const gameboard = new Gameboard(boardSize);
     gameboard.receiveAttack(0, 0);
     gameboard.receiveAttack(0, 1);
     gameboard.receiveAttack(0, 2);
@@ -18,7 +19,8 @@ test('Unhit grids will have a false "isHit" value', () => {
 });
 
 test('Hit grids will have a true "isHit" value', () => {
-    const gameboard = new Gameboard();
+    const boardSize = 10;
+    const gameboard = new Gameboard(boardSize);
     gameboard.receiveAttack(0, 0);
     gameboard.receiveAttack(0, 1);
     gameboard.receiveAttack(0, 2);
@@ -27,7 +29,8 @@ test('Hit grids will have a true "isHit" value', () => {
 
 test('Ships are placed at the right coordinates', () => {
     // Create gameboard.
-    const gameboard = new Gameboard();
+    const boardSize = 10;
+    const gameboard = new Gameboard(boardSize);
 
     // Create a size 4 vertical ship.
     const shipLength = 4;
@@ -54,7 +57,8 @@ test('Ships are placed at the right coordinates', () => {
 
 test('Place ship method throws an error if a vertical ship is placed in an invalid coordinates ', () => {
     // Create gameboard.
-    const gameboard = new Gameboard();
+    const boardSize = 10;
+    const gameboard = new Gameboard(boardSize);
 
     // Create a size 4 vertical ship.
     const shipLength = 4;
@@ -62,8 +66,8 @@ test('Place ship method throws an error if a vertical ship is placed in an inval
     const ship = new Ship(shipLength, isVertical);
 
     // Place the ship.
-    const initialRow = 9;
-    const initialColumn = 9;
+    const initialRow = boardSize;
+    const initialColumn = boardSize;
 
     // Wrap the placeShip operation in a function
     const placeShipOperation = () => {
@@ -76,7 +80,8 @@ test('Place ship method throws an error if a vertical ship is placed in an inval
 
 test('Place ship method throws an error if a horizontal ship is placed in an invalid coordinates ', () => {
     // Create gameboard.
-    const gameboard = new Gameboard();
+    const boardSize = 10;
+    const gameboard = new Gameboard(boardSize);
 
     // Create a size 2 horizontal ship.
     const shipLength = 2;
@@ -85,7 +90,7 @@ test('Place ship method throws an error if a horizontal ship is placed in an inv
 
     // Place the ship.
     const initialRow = 0;
-    const initialColumn = 9;
+    const initialColumn = boardSize;
 
     // Wrap the placeShip operation in a function
     const placeShipOperation = () => {
@@ -98,7 +103,8 @@ test('Place ship method throws an error if a horizontal ship is placed in an inv
 
 test('placeShip() throws an error if a grid is already occoupied by another ship', () => {
     // Create gameboard.
-    const gameboard = new Gameboard();
+    const boardSize = 10;
+    const gameboard = new Gameboard(boardSize);
 
     // Create ship A.
     const shipLength = 3;
@@ -123,7 +129,8 @@ test('placeShip() throws an error if a grid is already occoupied by another ship
 
 test('placeShip() throws an error if ships are not 1 grid apart', () => {
     // Create gameboard.
-    const gameboard = new Gameboard();
+    const boardSize = 10;
+    const gameboard = new Gameboard(boardSize);
 
     // Create ship A.
     const shipLength = 3;
