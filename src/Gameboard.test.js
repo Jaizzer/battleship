@@ -2,7 +2,7 @@ import Gameboard from './Gameboard';
 import Ship from './Ship';
 
 test('Unhit grids will have a false "isHit" value', () => {
-    let gameboard = new Gameboard();
+    const gameboard = new Gameboard();
     gameboard.receiveAttack(0, 0);
     gameboard.receiveAttack(0, 1);
     gameboard.receiveAttack(0, 2);
@@ -18,7 +18,7 @@ test('Unhit grids will have a false "isHit" value', () => {
 });
 
 test('Hit grids will have a true "isHit" value', () => {
-    let gameboard = new Gameboard();
+    const gameboard = new Gameboard();
     gameboard.receiveAttack(0, 0);
     gameboard.receiveAttack(0, 1);
     gameboard.receiveAttack(0, 2);
