@@ -35,17 +35,17 @@ test('Ships are placed at the right coordinates', () => {
     const ship = new Ship(shipLength, isVertical);
 
     // Place the ship.
-    const initialX = 0;
-    const initialY = 1;
-    gameboard.placeShip(ship, [initialX, initialY]);
+    const initialRow = 0;
+    const initialColumn = 1;
+    gameboard.placeShip(ship, [initialRow, initialColumn]);
 
     // Get all the grids occupied by the ship
     const occupiedGrids = [];
     for (let i = 0; i < shipLength; i++) {
         if (ship.isVertical) {
-            occupiedGrids.push(gameboard.grid[initialX + i][initialY]);
+            occupiedGrids.push(gameboard.grid[initialRow + i][initialColumn]);
         } else {
-            occupiedGrids.push(gameboard.grid[initialX][initialY + 1]);
+            occupiedGrids.push(gameboard.grid[initialRow][initialColumn + 1]);
         }
     }
 
@@ -62,12 +62,12 @@ test('Place ship method throws an error if a vertical ship is placed in an inval
     const ship = new Ship(shipLength, isVertical);
 
     // Place the ship.
-    const initialX = 9;
-    const initialY = 9;
+    const initialRow = 9;
+    const initialColumn = 9;
 
     // Wrap the placeShip operation in a function
     const placeShipOperation = () => {
-        gameboard.placeShip(ship, [initialX, initialY]);
+        gameboard.placeShip(ship, [initialRow, initialColumn]);
     };
 
     // Use the expect statement with the wrapped function
@@ -84,12 +84,12 @@ test('Place ship method throws an error if a horizontal ship is placed in an inv
     const ship = new Ship(shipLength, isVertical);
 
     // Place the ship.
-    const initialX = 0;
-    const initialY = 9;
+    const initialRow = 0;
+    const initialColumn = 9;
 
     // Wrap the placeShip operation in a function
     const placeShipOperation = () => {
-        gameboard.placeShip(ship, [initialX, initialY]);
+        gameboard.placeShip(ship, [initialRow, initialColumn]);
     };
 
     // Use the expect statement with the wrapped function
@@ -106,9 +106,9 @@ test('placeShip() throws an error if a grid is already occoupied by another ship
     const shipA = new Ship(shipLength, isVertical);
 
     // Place the ship A.
-    const initialX = 0;
-    const initialY = 0;
-    gameboard.placeShip(shipA, [initialX, initialY]);
+    const initialRow = 0;
+    const initialColumn = 0;
+    gameboard.placeShip(shipA, [initialRow, initialColumn]);
 
     // Create ship B.
     const shipB = new Ship(3, true);
@@ -116,7 +116,7 @@ test('placeShip() throws an error if a grid is already occoupied by another ship
     // Wrap the placeShip operation in a function
     const placeShipOperation = () => {
         // Place the ship on an already occupied grid.
-        gameboard.placeShip(shipB, [initialX, initialY]);
+        gameboard.placeShip(shipB, [initialRow, initialColumn]);
     };
     expect(placeShipOperation).toThrow(/Invalid coordinates: Grid already occupied/);
 });
@@ -131,9 +131,9 @@ test('placeShip() throws an error if ships are not 1 grid apart', () => {
     const shipA = new Ship(shipLength, isVertical);
 
     // Place the ship A.
-    const initialX = 0;
-    const initialY = 0;
-    gameboard.placeShip(shipA, [initialX, initialY]);
+    const initialRow = 0;
+    const initialColumn = 0;
+    gameboard.placeShip(shipA, [initialRow, initialColumn]);
 
     // Create ship B.
     const shipB = new Ship(3, true);
@@ -141,7 +141,7 @@ test('placeShip() throws an error if ships are not 1 grid apart', () => {
     // Wrap the placeShip operation in a function
     const placeShipOperation = () => {
         // Place the ship B next to ship A.
-        gameboard.placeShip(shipB, [initialX, initialY + 1]);
+        gameboard.placeShip(shipB, [initialRow, initialColumn + 1]);
     };
     expect(placeShipOperation).toThrow(/Invalid coordinates: Ships are not 1-grid apart/);
 });

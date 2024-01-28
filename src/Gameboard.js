@@ -51,16 +51,16 @@ export default class Gameboard {
             ];
 
             // Get all the valid coordinates (not out of bounds).
-            adjacentGridsCoordinates = adjacentGridsCoordinates.filter(([gridCoordinateX, gridCoordinateY]) => {
-                if (gridCoordinateX >= 0 && gridCoordinateX <= 9 && gridCoordinateY >= 0 && gridCoordinateY <= 9) {
+            adjacentGridsCoordinates = adjacentGridsCoordinates.filter(([gridCoordinateRow, gridCoordinateColumn]) => {
+                if (gridCoordinateRow >= 0 && gridCoordinateRow <= 9 && gridCoordinateColumn >= 0 && gridCoordinateColumn <= 9) {
                     return true;
                 }
                 return false;
             });
 
             // Get all the valid grid from the valid coordinates.
-            let adjacentGrids = adjacentGridsCoordinates.map(([adjacentGridsCoordinatesX, adjacentGridsCoordinatesY]) => {
-                return this.grid[adjacentGridsCoordinatesX][adjacentGridsCoordinatesY];
+            let adjacentGrids = adjacentGridsCoordinates.map(([adjacentGridsCoordinateRow, adjacentGridsCoordinateColumn]) => {
+                return this.grid[adjacentGridsCoordinateRow][adjacentGridsCoordinateColumn];
             });
 
             // Check if all valid adjacent grids are empty or occupied by the same ship to be placed at the current grid.
