@@ -17,36 +17,30 @@ export default class Gameboard {
     placeShip(Ship, [initialRow, initialColumn]) {
         let isGridOccupied = false;
         let isGridOutOfBounds = false;
+        let currentRow;
+        let currentColumn;
         for (let i = 0; i < Ship.length; i++) {
             if (Ship.isVertical) {
-                // Throw error if grid is out of bounds.
-                isGridOutOfBounds = initialRow + i > 9 || initialColumn > 9;
-                if (isGridOutOfBounds) {
-                    throw new Error('Invalid coordinates: Out of bounds');
-                }
-
-                // Throw error if grid is already occupied
-                isGridOccupied = this.grid[initialRow + i][initialColumn].ship !== null;
-                if (isGridOccupied) {
-                    throw new Error('Invalid coordinates: Grid already occupied');
-                }
-
-                this.grid[initialRow + i][initialColumn].ship = Ship;
+                currentRow = initialRow + i;
+                currentColumn = initialColumn;
             } else {
-                // Throw error if grid is out of bounds.
-                isGridOutOfBounds = initialRow > 9 || initialColumn + i > 9;
-                if (isGridOutOfBounds) {
-                    throw new Error('Invalid coordinates: Out of bounds');
-                }
-
-                // Throw error if grid is already occupied
-                isGridOccupied = this.grid[initialRow][initialColumn + i].ship !== null;
-                if (isGridOccupied) {
-                    throw new Error('Invalid coordinates: Grid already occupied');
-                }
-
-                this.grid[initialRow][initialColumn + i].ship = Ship;
+                currentRow = initialRow;
+                currentColumn = initialColumn + i;
             }
+
+            // Throw error if grid is out of bounds.
+            isGridOutOfBounds = currentRow > 9 || currentColumn > 9;
+            if (isGridOutOfBounds) {
+                throw new Error('Invalid coordinates: Out of bounds');
+            }
+
+            // Throw error if grid is already occupied
+            isGridOccupied = this.grid[currentRow][currentColumn].ship !== null;
+            if (isGridOccupied) {
+                throw new Error('Invalid coordinates: Grid already occupied');
+            }
+
+            this.grid[currentRow][currentColumn].ship = Ship;
         }
     }
 }
