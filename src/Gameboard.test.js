@@ -120,3 +120,28 @@ test('placeShip() throws an error if a grid is already occoupied by another ship
     };
     expect(placeShipOperation).toThrow(/Invalid coordinates: Grid already occupied/);
 });
+
+test('placeShip() throws an error if ships are not 1 grid apart', () => {
+    // Create gameboard.
+    const gameboard = new Gameboard();
+
+    // Create ship A.
+    const shipLength = 3;
+    const isVertical = true;
+    const shipA = new Ship(shipLength, isVertical);
+
+    // Place the ship A.
+    const initialX = 0;
+    const initialY = 0;
+    gameboard.placeShip(shipA, [initialX, initialY]);
+
+    // Create ship B.
+    const shipB = new Ship(3, true);
+
+    // Wrap the placeShip operation in a function
+    const placeShipOperation = () => {
+        // Place the ship B next to ship A.
+        gameboard.placeShip(shipB, [initialX, initialY + 1]);
+    };
+    expect(placeShipOperation).toThrow(/Invalid coordinates: Ships are not 1-grid apart/);
+});
