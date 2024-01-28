@@ -25,7 +25,7 @@
             {
               "devDependencies": false,
               "optionalDependencies": false,
-              "peerDependencies": false,
+              "peerDependencies": false
             }
         ]
     }
