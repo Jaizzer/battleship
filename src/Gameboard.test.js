@@ -55,6 +55,20 @@ test('Ships are placed at the right coordinates', () => {
     expect(occupiedGrids.every((grid) => grid.ship === ship)).toBe(true);
 });
 
+test('Newly placed ships are appended to the fleet array', () => {
+    // Create gameboard.
+    const boardSize = 10;
+    const gameboard = new Gameboard(boardSize);
+
+    // Create a size 4 vertical ship.
+    const shipLength = 4;
+    const isVertical = true;
+    const ship = new Ship(shipLength, isVertical);
+    gameboard.placeShip(ship, [5, 5]);
+
+    expect(gameboard.fleet[gameboard.fleet.length - 1]).toBe(ship);
+});
+
 test('Place ship method throws an error if a vertical ship is placed in an invalid coordinates ', () => {
     // Create gameboard.
     const boardSize = 10;

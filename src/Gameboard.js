@@ -8,6 +8,9 @@ export default class Gameboard {
             }
             this.grid.push(row);
         }
+
+        // Initialize fleet.
+        this.fleet = [];
     }
 
     receiveAttack(x, y) {
@@ -81,5 +84,7 @@ export default class Gameboard {
             // Place the ship at current grid.
             this.grid[currentRow][currentColumn].ship = Ship;
         }
+        // Append ship to the fleet array.
+        this.fleet.push(Ship);
     }
 }
