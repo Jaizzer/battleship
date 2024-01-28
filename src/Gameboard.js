@@ -93,4 +93,8 @@ export default class Gameboard {
         // Append ship to the fleet array.
         this.fleet.push(Ship);
     }
+
+    isFleetSunk() {
+        return this.fleet.every((ship) => ship.isSunk());
+    }
 }

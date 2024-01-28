@@ -166,3 +166,61 @@ test('placeShip() throws an error if ships are not 1 grid apart', () => {
     };
     expect(placeShipOperation).toThrow(/Invalid coordinates: Ships are not 1-grid apart/);
 });
+
+test('isFleetSunk() returns true if all ships were sunk', () => {
+    // Create gameboard.
+    const boardSize = 10;
+    const gameboard = new Gameboard(boardSize);
+
+    // Create ship A.
+    const shipA = new Ship(3, true);
+
+    // Place the ship A.
+    gameboard.placeShip(shipA, [0, 0]);
+
+    // Create ship B.
+    const shipB = new Ship(2, true);
+
+    // Place the ship B.
+    gameboard.placeShip(shipB, [0, 4]);
+
+    // Hit all the grids containing ship.
+    for (let i = 0; i < gameboard.grid.length; i++) {
+        for (let j = 0; j < gameboard.grid.length; j++) {
+            let gridIsOccupiedByAShip = gameboard.grid[i][j].ship !== null;
+            if (gridIsOccupiedByAShip) {
+                gameboard.receiveAttack(i, j);
+            }
+        }
+    }
+    expect(gameboard.isFleetSunk()).toBe(true);
+});
+
+test('isFleetSunk() returns false if not all ships were sunk', () => {
+    // Create gameboard.
+    const boardSize = 10;
+    const gameboard = new Gameboard(boardSize);
+
+    // Create ship A.
+    const shipA = new Ship(3, true);
+
+    // Place the ship A.
+    gameboard.placeShip(shipA, [0, 0]);
+
+    // Create ship B.
+    const shipB = new Ship(2, true);
+
+    // Place the ship B.
+    gameboard.placeShip(shipB, [0, 4]);
+
+    // Only hit ship A.
+    for (let i = 0; i < gameboard.grid.length; i++) {
+        for (let j = 0; j < gameboard.grid.length; j++) {
+            let gridIsOccupiedByAShipA = gameboard.grid[i][j].ship === shipA;
+            if (gridIsOccupiedByAShipA) {
+                gameboard.receiveAttack(i, j);
+            }
+        }
+    }
+    expect(gameboard.isFleetSunk()).toBe(false);
+});
