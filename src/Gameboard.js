@@ -15,11 +15,9 @@ export default class Gameboard {
     }
 
     placeShip(Ship, [initialRow, initialColumn]) {
-        let isGridOccupied = false;
-        let isGridOutOfBounds = false;
-        let currentRow;
-        let currentColumn;
         for (let i = 0; i < Ship.length; i++) {
+            let currentRow;
+            let currentColumn;
             if (Ship.isVertical) {
                 currentRow = initialRow + i;
                 currentColumn = initialColumn;
@@ -29,13 +27,13 @@ export default class Gameboard {
             }
 
             // Throw error if grid is out of bounds.
-            isGridOutOfBounds = currentRow > 9 || currentColumn > 9;
+            let isGridOutOfBounds = currentRow > 9 || currentColumn > 9;
             if (isGridOutOfBounds) {
                 throw new Error('Invalid coordinates: Out of bounds');
             }
 
             // Throw error if grid is already occupied
-            isGridOccupied = this.grid[currentRow][currentColumn].ship !== null;
+            let isGridOccupied = this.grid[currentRow][currentColumn].ship !== null;
             if (isGridOccupied) {
                 throw new Error('Invalid coordinates: Grid already occupied');
             }
