@@ -52,7 +52,7 @@ test('Ships are placed at the right coordinates', () => {
     expect(occupiedGrids.every((grid) => grid.ship === ship)).toBe(true);
 });
 
-test('Place ship method throws error if a vertical ship is placed in an invalid coordinates ', () => {
+test('Place ship method throws an error if a vertical ship is placed in an invalid coordinates ', () => {
     // Create gameboard.
     const gameboard = new Gameboard();
 
@@ -93,7 +93,7 @@ test('Place ship method throws an error if a horizontal ship is placed in an inv
     };
 
     // Use the expect statement with the wrapped function
-    expect(placeShipOperation).toThrow(/Invalid/);
+    expect(placeShipOperation).toThrow(/Invalid coordinates: Out of bounds/);
 });
 
 test('placeShip() throws an error if a grid is already occoupied by another ship', () => {
@@ -118,5 +118,5 @@ test('placeShip() throws an error if a grid is already occoupied by another ship
         // Place the ship on an already occupied grid.
         gameboard.placeShip(shipB, [initialX, initialY]);
     };
-    expect(placeShipOperation).toThrow(/Invalid/);
+    expect(placeShipOperation).toThrow(/Invalid coordinates: Grid already occupied/);
 });
