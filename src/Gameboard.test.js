@@ -95,3 +95,28 @@ test('Place ship method throws an error if a horizontal ship is placed in an inv
     // Use the expect statement with the wrapped function
     expect(placeShipOperation).toThrow(/Invalid/);
 });
+
+test('placeShip() throws an error if a grid is already occoupied by another ship', () => {
+    // Create gameboard.
+    const gameboard = new Gameboard();
+
+    // Create ship A.
+    const shipLength = 3;
+    const isVertical = true;
+    const shipA = new Ship(shipLength, isVertical);
+
+    // Place the ship A.
+    const initialX = 0;
+    const initialY = 0;
+    gameboard.placeShip(shipA, [initialX, initialY]);
+
+    // Create ship B.
+    const shipB = new Ship(3, true);
+
+    // Wrap the placeShip operation in a function
+    const placeShipOperation = () => {
+        // Place the ship on an already occupied grid.
+        gameboard.placeShip(shipB, [initialX, initialY]);
+    };
+    expect(placeShipOperation).toThrow(/Invalid/);
+});

@@ -16,10 +16,23 @@ export default class Gameboard {
 
     placeShip(Ship, [initialRow, initialColumn]) {
         try {
+            let isGridOccupied = false;
             for (let i = 0; i < Ship.length; i++) {
                 if (Ship.isVertical) {
+                    // Throw error if grid is already occupied
+                    isGridOccupied = this.grid[initialRow + i][initialColumn].ship !== null;
+                    if (isGridOccupied) {
+                        throw new Error('Invalid coordinates');
+                    }
+
                     this.grid[initialRow + i][initialColumn].ship = Ship;
                 } else {
+                    // Throw error if grid is already occupied
+                    isGridOccupied = this.grid[initialRow][initialColumn + i].ship !== null;
+                    if (isGridOccupied) {
+                        throw new Error('Invalid coordinates');
+                    }
+
                     this.grid[initialRow][initialColumn + i].ship = Ship;
                 }
             }
