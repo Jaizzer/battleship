@@ -85,3 +85,40 @@ main algorithm,
     updateDatabase() {
         send new jsonfile to the server reflecting changes
     }
+
+
+    player,
+        - attack()
+
+    gameRunner(Player1, Player2) 
+        - ask players what to attack
+
+1-device, (AI, 2player)
+2-device, multiplayer, server
+
+mainLoop()
+
+    - ask game mode,
+        -if AI, create Player A, and Player B set to computer.
+
+    - create UPDATE object
+
+    - create Players and Gameboard
+    - currentTurn = Player A.
+
+    - parse UPDATE object
+    - load UPDATE
+
+    - display curretTurn full visible gameboard.
+    - display !currentTurn gameboard with fog of war.
+
+    - Ask the current turn what to attack.
+    - swap boards when switching turn (DOM)
+    - every turn, check if all ships are sunk,
+    - if missed, 
+        -currentTurn = !currentTurn
+        if (PlayeB.computer) 
+            - makeMove(UPDATE);
+        else 
+            - UPDATE =  server
+
