@@ -34,8 +34,8 @@ test('Ships are placed at the right coordinates', () => {
 
     // Create a size 4 vertical ship.
     const shipLength = 4;
-    const isVertical = true;
-    const ship = new Ship(shipLength, isVertical);
+    const orientation = 'vertical';
+    const ship = new Ship(shipLength, orientation);
 
     // Place the ship.
     const initialRow = 0;
@@ -45,7 +45,7 @@ test('Ships are placed at the right coordinates', () => {
     // Get all the grids occupied by the ship
     const occupiedGrids = [];
     for (let i = 0; i < shipLength; i++) {
-        if (ship.isVertical) {
+        if (ship.orientation) {
             occupiedGrids.push(gameboard.grid[initialRow + i][initialColumn]);
         } else {
             occupiedGrids.push(gameboard.grid[initialRow][initialColumn + 1]);
@@ -62,8 +62,8 @@ test('Newly placed ships are appended to the fleet array', () => {
 
     // Create a size 4 vertical ship.
     const shipLength = 4;
-    const isVertical = true;
-    const ship = new Ship(shipLength, isVertical);
+    const orientation = 'vertical';
+    const ship = new Ship(shipLength, orientation);
     gameboard.placeShip(ship, [5, 5]);
 
     expect(gameboard.fleet[gameboard.fleet.length - 1]).toBe(ship);
@@ -76,8 +76,8 @@ test('Place ship method throws an error if a vertical ship is placed in an inval
 
     // Create a size 4 vertical ship.
     const shipLength = 4;
-    const isVertical = true;
-    const ship = new Ship(shipLength, isVertical);
+    const orientation = 'vertical';
+    const ship = new Ship(shipLength, orientation);
 
     // Place the ship.
     const initialRow = boardSize;
@@ -99,8 +99,8 @@ test('Place ship method throws an error if a horizontal ship is placed in an inv
 
     // Create a size 2 horizontal ship.
     const shipLength = 2;
-    const isVertical = false;
-    const ship = new Ship(shipLength, isVertical);
+    const orientation = 'horizontal';
+    const ship = new Ship(shipLength, orientation);
 
     // Place the ship.
     const initialRow = 0;
@@ -122,8 +122,8 @@ test('placeShip() throws an error if a grid is already occoupied by another ship
 
     // Create ship A.
     const shipLength = 3;
-    const isVertical = true;
-    const shipA = new Ship(shipLength, isVertical);
+    const orientation = 'vertical';
+    const shipA = new Ship(shipLength, orientation);
 
     // Place the ship A.
     const initialRow = 0;
@@ -131,7 +131,7 @@ test('placeShip() throws an error if a grid is already occoupied by another ship
     gameboard.placeShip(shipA, [initialRow, initialColumn]);
 
     // Create ship B.
-    const shipB = new Ship(3, true);
+    const shipB = new Ship(3, 'vertical');
 
     // Wrap the placeShip operation in a function
     const placeShipOperation = () => {
@@ -148,8 +148,8 @@ test('placeShip() throws an error if ships are not 1 grid apart', () => {
 
     // Create ship A.
     const shipLength = 3;
-    const isVertical = true;
-    const shipA = new Ship(shipLength, isVertical);
+    const orientation = 'vertical';
+    const shipA = new Ship(shipLength, orientation);
 
     // Place the ship A.
     const initialRow = 0;
@@ -157,7 +157,7 @@ test('placeShip() throws an error if ships are not 1 grid apart', () => {
     gameboard.placeShip(shipA, [initialRow, initialColumn]);
 
     // Create ship B.
-    const shipB = new Ship(3, true);
+    const shipB = new Ship(3, 'vertical');
 
     // Wrap the placeShip operation in a function
     const placeShipOperation = () => {
@@ -173,13 +173,13 @@ test('isFleetSunk() returns true if all ships were sunk', () => {
     const gameboard = new Gameboard(boardSize);
 
     // Create ship A.
-    const shipA = new Ship(3, true);
+    const shipA = new Ship(3, 'vertical');
 
     // Place the ship A.
     gameboard.placeShip(shipA, [0, 0]);
 
     // Create ship B.
-    const shipB = new Ship(2, true);
+    const shipB = new Ship(2, 'vertical');
 
     // Place the ship B.
     gameboard.placeShip(shipB, [0, 4]);
@@ -202,13 +202,13 @@ test('isFleetSunk() returns false if not all ships were sunk', () => {
     const gameboard = new Gameboard(boardSize);
 
     // Create ship A.
-    const shipA = new Ship(3, true);
+    const shipA = new Ship(3, 'vertical');
 
     // Place the ship A.
     gameboard.placeShip(shipA, [0, 0]);
 
     // Create ship B.
-    const shipB = new Ship(2, true);
+    const shipB = new Ship(2, 'vertical');
 
     // Place the ship B.
     gameboard.placeShip(shipB, [0, 4]);

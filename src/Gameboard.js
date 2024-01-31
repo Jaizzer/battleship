@@ -28,7 +28,7 @@ export default class Gameboard {
         for (let i = 0; i < Ship.length; i++) {
             let currentRow;
             let currentColumn;
-            if (Ship.isVertical) {
+            if (Ship.orientation === 'vertical') {
                 currentRow = initialRow + i;
                 currentColumn = initialColumn;
             } else {
