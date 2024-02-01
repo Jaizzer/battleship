@@ -24,6 +24,7 @@ export default class Gameboard {
     }
 
     placeShip(Ship, [initialRow, initialColumn]) {
+        const gridsToBeOccupied = [];
         for (let i = 0; i < Ship.length; i++) {
             let currentRow;
             let currentColumn;
@@ -82,9 +83,15 @@ export default class Gameboard {
                 throw new Error('Invalid coordinates: Ships are not 1-grid apart');
             }
 
-            // Place the ship at current grid.
-            this.grid[currentRow][currentColumn].ship = Ship;
+            // Add current grid to the array of grids to be occupied.
+            gridsToBeOccupied.push(this.grid[currentRow][currentColumn]);
         }
+
+        // Place the the ship to all the grids to be occupied.
+        gridsToBeOccupied.forEach((grid) => {
+            grid.ship = Ship;
+        });
+
         // Append ship to the fleet array.
         this.fleet.push(Ship);
     }
