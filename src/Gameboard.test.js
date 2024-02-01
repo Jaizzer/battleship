@@ -138,7 +138,7 @@ test('placeShip() throws an error if a grid is already occoupied by another ship
         // Place the ship on an already occupied grid.
         gameboard.placeShip(shipB, [initialRow, initialColumn]);
     };
-    expect(placeShipOperation).toThrow(/Invalid coordinates: Grid already occupied/);
+    expect(placeShipOperation).toThrow(/Invalid coordinates: Ships are not 1-grid apart/);
 });
 
 test('placeShip() throws an error if ships are not 1 grid apart', () => {

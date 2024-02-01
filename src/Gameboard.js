@@ -41,14 +41,9 @@ export default class Gameboard {
                 throw new Error('Invalid coordinates: Out of bounds');
             }
 
-            // Throw error if grid is already occupied
-            let isGridOccupied = this.grid[currentRow][currentColumn].ship !== null;
-            if (isGridOccupied) {
-                throw new Error('Invalid coordinates: Grid already occupied');
-            }
-
             // Get all possible adjacent coordinates of current grid.
             let adjacentGridsCoordinates = [
+                [initialRow, initialColumn],
                 [currentRow - 1, currentColumn - 1],
                 [currentRow - 1, currentColumn],
                 [currentRow - 1, currentColumn + 1],
