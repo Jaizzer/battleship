@@ -42,44 +42,25 @@ export default class Gameboard {
                 throw new Error('Invalid coordinates: Out of bounds');
             }
 
-            // Get all possible adjacent coordinates of current grid.
-            let adjacentGridsCoordinates = [
-                [initialRow, initialColumn],
-                [currentRow - 1, currentColumn - 1],
-                [currentRow - 1, currentColumn],
-                [currentRow - 1, currentColumn + 1],
-                [currentRow, currentColumn - 1],
-                [currentRow, currentColumn + 1],
-                [currentRow + 1, currentColumn - 1],
-                [currentRow + 1, currentColumn],
-                [currentRow + 1, currentColumn + 1],
-            ];
-
-            // Get all the valid coordinates (not out of bounds).
-            adjacentGridsCoordinates = adjacentGridsCoordinates.filter(([gridCoordinateRow, gridCoordinateColumn]) => {
-                if (
-                    gridCoordinateRow >= 0 &&
-                    gridCoordinateRow < this.grid.length &&
-                    gridCoordinateColumn >= 0 &&
-                    gridCoordinateColumn < this.grid.length
-                ) {
-                    return true;
+            // Check if ships are 1 grid apart.
+            let areShipsOneGridApart = true;
+            rowLoop: for (let i = -1; i <= 1; i++) {
+                for (let j = -1; j <= 1; j++) {
+                    let row = currentRow + i;
+                    let col = currentColumn + j;
+                    // Only check grids that are not out of bounds.
+                    if (row >= 0 && row < this.grid.length && col >= 0 && col < this.grid.length) {
+                        // Immediately break once an adjacent grid containing a dfferent ship is found.
+                        if (this.grid[row][col].ship !== null) {
+                            areShipsOneGridApart = false;
+                            break rowLoop;
+                        }
+                    }
                 }
-                return false;
-            });
-
-            // Get all the valid grid from the valid coordinates.
-            let adjacentGrids = adjacentGridsCoordinates.map(([adjacentGridsCoordinateRow, adjacentGridsCoordinateColumn]) => {
-                return this.grid[adjacentGridsCoordinateRow][adjacentGridsCoordinateColumn];
-            });
-
-            // Check if all valid adjacent grids are empty or occupied by the same ship to be placed at the current grid.
-            let isShipOneGridApart = adjacentGrids.every((grid) => {
-                return grid.ship === null || grid.ship === Ship;
-            });
+            }
 
             // Throw error if there is an adjacent grid that is occupied by a different ship (Ships are not 1-grid apart).
-            if (!isShipOneGridApart) {
+            if (!areShipsOneGridApart) {
                 throw new Error('Invalid coordinates: Ships are not 1-grid apart');
             }
 
