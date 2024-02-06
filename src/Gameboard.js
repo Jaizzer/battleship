@@ -80,4 +80,18 @@ export default class Gameboard {
     isFleetSunk() {
         return this.fleet.every((ship) => ship.isSunk());
     }
+
+    clear() {
+        // Remove all ships on the grid.
+        for (let row = 0; row < this.grid.length; row++) {
+            for (let col = 0; col < this.grid.length; col++) {
+                if (this.grid[row][col].ship !== null) {
+                    this.grid[row][col].ship = null;
+                }
+            }
+        }
+
+        // Clear the fleet array.
+        this.fleet = [];
+    }
 }
