@@ -1,0 +1,18 @@
+.gameboard {
+    display: grid;
+    width: 500px;
+    height: 500px;
+    /* Grid Template Rows and Columns are dynamically modified in 'renderGameboard' function inside runGame.js module */
+}
+
+.gameboard-grid {
+    border: 1px solid grey;
+}
+
+.gameboard-grid.occupied {
+    background-color: rgb(124, 124, 138);
+}
+
+.gameboard-grid.empty {
+    background-color: rgb(97, 212, 230);
+}
