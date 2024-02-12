@@ -2,8 +2,9 @@ import Gameboard from './Gameboard';
 import Ship from './Ship';
 import Player from './Player';
 import randomlyPlaceFleet from './randomlyPlaceFleet';
+import startGame from './startGame';
 
-export default function runGame() {
+export default async function runGame() {
     const gameModes = ['single-player-1-device', 'multiplayer-1-device', 'multiplayer-2-device'];
 
     // Pick a game mode (set to single player for now).
@@ -42,4 +43,8 @@ export default function runGame() {
     ];
     let playerBGameboard = randomlyPlaceFleet(playerBFleet, new Gameboard(10));
     const playerB = new Player(playerBName, playerBGameboard, false);
+
+    let winner = await startGame(playerA, playerB);
+
+    alert(`${winner.name} won!`);
 }
