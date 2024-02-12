@@ -13,10 +13,13 @@ export default function renderGameboard(gameboard, parentElement) {
 
             // Add classes describing whether a grid is occupied or empty.
             const isGridOccupied = gameboard.grid[row][column].ship !== null;
-            if (isGridOccupied) {
-                grid.classList.add('occupied');
-            } else {
-                grid.classList.add('empty');
+
+            // Add class for grids that were hit.
+            const isGridHit = gameboard.grid[row][column].isHit;
+            if (isGridHit && isGridOccupied) {
+                grid.classList.add('occupied', 'hit');
+            } else if (isGridHit && !isGridOccupied) {
+                grid.classList.add('empty', 'hit');
             }
 
             // Add the grid to the gameboard.
