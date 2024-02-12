@@ -13,6 +13,30 @@
     background-color: rgb(124, 124, 138);
 }
 
-.gameboard-grid.empty {
+.gameboard-grid {
     background-color: rgb(97, 212, 230);
+}
+
+.gameboard-grid.hit {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+}
+
+.gameboard-grid.occupied.hit:after {
+    content: 'X';
+    font-size: 45px;
+    font-family: sans-serif;
+}
+
+.gameboard-grid.empty.hit:after {
+    content: '·';
+    font-size: 45px;
+    font-family: sans-serif;
+}
+
+body {
+    display: grid;
+    gap: 10px;
+    grid-auto-flow: column;
 }
