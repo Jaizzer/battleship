@@ -1,4 +1,6 @@
-export default function startGame(playerA, playerB) {
+import renderGameboard from './renderGameboard';
+
+export default async function startGame(playerA, playerB) {
     let currentTurn = playerA;
     let nextTurn = playerB;
 
@@ -13,14 +15,28 @@ export default function startGame(playerA, playerB) {
                 x = Math.floor(Math.random() * currentTurn.gameboard.grid.length);
                 y = Math.floor(Math.random() * currentTurn.gameboard.grid.length);
             } else {
-                // Prompt the coordinates if the player is not a computer.
-                x = parseInt(prompt('X:'));
-                y = parseInt(prompt('Y:'));
+                // Update gameboard view
+                document.body.innerHTML = '';
+                renderGameboard(nextTurn.gameboard, document.body);
+                renderGameboard(currentTurn.gameboard, document.body);
+
+                // Access the gameboard.
+                const gameboard = document.querySelector('.gameboard');
+                if (!gameboard) throw new Error('"gameboard" not found');
+
+                // Wait for user to select a grid from the gameboard and get the corresponding coordinates.
+                [x, y] = await getGridCoordinatesToAttack(gameboard);
             }
+
             let gridIsNotHit = nextTurn.gameboard.grid[x][y].isHit === false;
             if (gridIsNotHit) {
                 // Fire at the grid.
                 nextTurn.gameboard.receiveAttack(x, y);
+
+                // Update gameboard view
+                document.body.innerHTML = '';
+                renderGameboard(nextTurn.gameboard, document.body);
+                renderGameboard(currentTurn.gameboard, document.body);
 
                 // Ship is hit.
                 if (nextTurn.gameboard.grid[x][y].ship) {
