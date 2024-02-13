@@ -17,8 +17,8 @@ export default async function startGame(playerA, playerB) {
             } else {
                 // Update gameboard view
                 document.body.innerHTML = '';
-                renderGameboard(nextTurn.gameboard, document.body);
-                renderGameboard(currentTurn.gameboard, document.body);
+                renderGameboard(nextTurn.gameboard, document.body, false);
+                renderGameboard(currentTurn.gameboard, document.body, true);
 
                 // Access the gameboard.
                 const gameboard = document.querySelector('.gameboard');
@@ -35,8 +35,8 @@ export default async function startGame(playerA, playerB) {
 
                 // Update gameboard view
                 document.body.innerHTML = '';
-                renderGameboard(nextTurn.gameboard, document.body);
-                renderGameboard(currentTurn.gameboard, document.body);
+                renderGameboard(nextTurn.gameboard, document.body, false);
+                renderGameboard(currentTurn.gameboard, document.body, true);
 
                 // Ship is hit.
                 if (nextTurn.gameboard.grid[x][y].ship) {

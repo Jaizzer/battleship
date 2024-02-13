@@ -1,4 +1,4 @@
-export default function renderGameboard(gameboard, parentElement) {
+export default function renderGameboard(gameboard, parentElement, isVisible) {
     // Create gameboard.
     const gameboardDiv = document.createElement('div');
     gameboardDiv.classList.add('gameboard');
@@ -13,6 +13,13 @@ export default function renderGameboard(gameboard, parentElement) {
 
             // Add classes describing whether a grid is occupied or empty.
             const isGridOccupied = gameboard.grid[row][column].ship !== null;
+
+            // Show the entire gameboard.
+            if (isVisible && isGridOccupied) {
+                grid.classList.add('occupied');
+            } else if (isVisible && !isGridOccupied) {
+                grid.classList.add('empty');
+            }
 
             // Add class for grids that were hit.
             const isGridHit = gameboard.grid[row][column].isHit;
