@@ -58,6 +58,11 @@ export default async function startGame(playerA, playerB) {
         temp = currentTurn;
         currentTurn = nextTurn;
         nextTurn = temp;
+
+        // Only show loading screen if both players are not computer
+        if (!currentTurn.isComputer && !nextTurn.isComputer) {
+            await passDevice();
+        }
     }
 
     // If loop breaks, next turn player's fleet have sunk and current turn player is the winner.
