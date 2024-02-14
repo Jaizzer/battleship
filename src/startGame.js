@@ -61,6 +61,9 @@ export default async function startGame(playerA, playerB) {
         currentTurn = nextTurn;
         nextTurn = temp;
 
+        // Add 1 second delay to give DOM enough time to update gameboards before switching players.
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
         // Only show loading screen if both players are not computer
         if (!currentTurn.isComputer && !nextTurn.isComputer) {
             await passDevice();
