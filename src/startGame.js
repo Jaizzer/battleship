@@ -66,7 +66,7 @@ export default async function startGame(playerA, playerB) {
 
         // Only show loading screen if both players are not computer
         if (!currentTurn.isComputer && !nextTurn.isComputer) {
-            await passDevice();
+            await passDevice(currentTurn.name);
         }
     }
 
@@ -88,14 +88,14 @@ async function getGridCoordinatesToAttack(gameboard) {
     });
 }
 
-function passDevice() {
+function passDevice(playerName) {
     document.body.innerHTML = '';
     const loadingScreen = document.createElement('div');
     loadingScreen.classList.add('loading-screen');
 
     const loadingScreenText = document.createElement('div');
     loadingScreenText.classList.add('text');
-    loadingScreenText.innerHTML = 'Switching turns...';
+    loadingScreenText.innerHTML = `Switching to ${playerName}...`;
     loadingScreen.appendChild(loadingScreenText);
 
     const loadingIcon = document.createElement('div');
