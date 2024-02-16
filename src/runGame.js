@@ -11,7 +11,7 @@ export default async function runGame() {
     const currentGameMode = gameModes[0];
 
     // Create Player A.
-    const playerAName = 'Jaizzer';
+    const playerAName = 'Player1';
     const playerAFleet = [
         new Ship(1, 'vertical'),
         new Ship(1, 'vertical'),
@@ -28,7 +28,7 @@ export default async function runGame() {
     const playerA = new Player(playerAName, playerAGameboard, false);
 
     // Create Player B.
-    const playerBName = 'Computer';
+    const playerBName = 'Player2';
     const playerBFleet = [
         new Ship(1, 'vertical'),
         new Ship(1, 'vertical'),
