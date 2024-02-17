@@ -1,4 +1,6 @@
 import renderGameboard from './renderGameboard';
+import getGridCoordinatesToAttack from './getCoordinatesToAttack';
+import passDevice from './passDevice';
 
 export default async function startGame(playerA, playerB) {
     let currentTurn = playerA;
@@ -74,44 +76,4 @@ export default async function startGame(playerA, playerB) {
     const winner = currentTurn;
 
     return winner;
-}
-
-// Function that waits for the player to select a grid and return the corresponding coordinates of that grid.
-async function getGridCoordinatesToAttack(gameboard) {
-    return new Promise((resolve) => {
-        const grids = Array.from(gameboard.children);
-        grids.forEach((grid) => {
-            grid.addEventListener('click', () => {
-                resolve([parseInt(grid.id[0]), parseInt(grid.id[2])]);
-            });
-        });
-    });
-}
-
-function passDevice(playerName) {
-    document.body.innerHTML = '';
-    const loadingScreen = document.createElement('div');
-    loadingScreen.classList.add('loading-screen');
-
-    const loadingScreenText = document.createElement('div');
-    loadingScreenText.classList.add('text');
-    loadingScreenText.innerHTML = `Switching to ${playerName}...`;
-    loadingScreen.appendChild(loadingScreenText);
-
-    const loadingIcon = document.createElement('div');
-    loadingIcon.classList.add('icon');
-    loadingScreen.appendChild(loadingIcon);
-
-    const button = document.createElement('button');
-    button.classList.add('switch');
-    button.innerHTML = 'Switch';
-    loadingScreen.appendChild(button);
-
-    document.body.appendChild(loadingScreen);
-
-    return new Promise((resolve) => {
-        button.addEventListener('click', () => {
-            resolve();
-        });
-    });
 }
