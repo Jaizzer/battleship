@@ -3,12 +3,13 @@ import Ship from './Ship';
 import Player from './Player';
 import randomlyPlaceFleet from './randomlyPlaceFleet';
 import startGame from './startGame';
+import getGameMode from './getGameMode';
 
 export default async function runGame() {
     const gameModes = ['single-player-1-device', 'multiplayer-1-device', 'multiplayer-2-device'];
 
     // Pick a game mode (set to single player for now).
-    const currentGameMode = gameModes[0];
+    const currentGameMode = await getGameMode(gameModes);
 
     // Create Player A.
     const playerAName = 'Player1';
