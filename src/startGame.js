@@ -35,11 +35,17 @@ export default async function startGame(playerA, playerB) {
                 // Fire at the grid.
                 nextTurn.gameboard.receiveAttack(x, y);
 
-                // Update gameboard view if the player is not computer
+                // Update gameboard view after every attack.
                 if (!currentTurn.isComputer) {
                     document.body.innerHTML = '';
                     renderGameboard(nextTurn.gameboard, document.body, false);
                     renderGameboard(currentTurn.gameboard, document.body, true);
+                } else {
+                    // Add 1 second delay to show sequential attack moves of the computer if it hit a ship.
+                    await new Promise((resolve) => setTimeout(resolve, 1000));
+                    document.body.innerHTML = '';
+                    renderGameboard(currentTurn.gameboard, document.body, false);
+                    renderGameboard(nextTurn.gameboard, document.body, true);
                 }
 
                 // Ship is hit.
