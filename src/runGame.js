@@ -4,6 +4,7 @@ import Player from './Player';
 import randomlyPlaceFleet from './randomlyPlaceFleet';
 import startGame from './startGame';
 import getGameMode from './getGameMode';
+import createPlayer from './createPlayer';
 
 export default async function runGame() {
     const gameModes = ['single-player-1-device', 'multiplayer-1-device', 'multiplayer-2-device'];
@@ -11,41 +12,24 @@ export default async function runGame() {
     // Pick a game mode (set to single player for now).
     const currentGameMode = await getGameMode(gameModes);
 
-    // Create Player A.
-    const playerAName = 'Player1';
-    const playerAFleet = [
-        new Ship(1, 'vertical'),
-        new Ship(1, 'vertical'),
-        new Ship(1, 'vertical'),
-        new Ship(1, 'vertical'),
-        new Ship(2, 'horizontal'),
-        new Ship(2, 'horizontal'),
-        new Ship(2, 'horizontal'),
-        new Ship(3, 'vertical'),
-        new Ship(3, 'horizontal'),
-        new Ship(4, 'horizontal'),
-    ];
-    let playerAGameboard = randomlyPlaceFleet(playerAFleet, new Gameboard(10));
-    const playerA = new Player(playerAName, playerAGameboard, false);
+    // Create the players.
+    let player1;
+    let player2;
+    switch (currentGameMode) {
+        case 'single-player-1-device':
+            // Create 1 human player and 1 computer.
+            player1 = await createPlayer(false);
+            player2 = await createPlayer(true);
+            break;
 
-    // Create Player B.
-    const playerBName = 'Player2';
-    const playerBFleet = [
-        new Ship(1, 'vertical'),
-        new Ship(1, 'vertical'),
-        new Ship(1, 'vertical'),
-        new Ship(1, 'vertical'),
-        new Ship(2, 'horizontal'),
-        new Ship(2, 'horizontal'),
-        new Ship(2, 'horizontal'),
-        new Ship(3, 'vertical'),
-        new Ship(3, 'horizontal'),
-        new Ship(4, 'horizontal'),
-    ];
-    let playerBGameboard = randomlyPlaceFleet(playerBFleet, new Gameboard(10));
-    const playerB = new Player(playerBName, playerBGameboard, false);
+        case 'multiplayer-1-device':
+            // Create two player that are both 'human.
+            player1 = await createPlayer(false);
+            player2 = await createPlayer(false);
+            break;
+    }
 
-    let winner = await startGame(playerA, playerB);
+    let winner = await startGame(player1, player2);
 
     alert(`${winner.name} won!`);
 }
