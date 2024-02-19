@@ -1,7 +1,3 @@
-import Gameboard from './Gameboard';
-import Ship from './Ship';
-import Player from './Player';
-import randomlyPlaceFleet from './randomlyPlaceFleet';
 import startGame from './startGame';
 import getGameMode from './getGameMode';
 import createPlayer from './createPlayer';
