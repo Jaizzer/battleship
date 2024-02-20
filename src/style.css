@@ -58,3 +58,49 @@ body {
         transform: rotate(360deg);
     }
 }
+
+.fleet-container {
+    width: 200px;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    background-color: red;
+    padding: 10px;
+}
+
+.ship {
+    border: 1px solid blue;
+}
+
+.ship.size-1.vertical {
+    height: 50px;
+    width: 50px;
+}
+.ship.size-2.vertical {
+    height: 100px;
+    width: 50px;
+}
+.ship.size-2.horizontal {
+    height: 50px;
+    width: 100px;
+}
+
+.ship.size-3.vertical {
+    height: 150px;
+    width: 50px;
+}
+.ship.size-3.horizontal {
+    height: 50px;
+    width: 150px;
+}
+
+.ship.size-4.vertical {
+    height: 200;
+    width: 50px;
+}
+.ship.size-4.horizontal {
+    height: 50px;
+    width: 200px;
+}
