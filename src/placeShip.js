@@ -20,6 +20,11 @@ export default async function placeShip() {
     const fleetContainer = document.createElement('div');
     fleetContainer.classList.add('fleet-container');
 
+    const playerGameboard = new Gameboard(10);
+
+    const gameboardContainer = document.querySelector('body');
+    gameboardContainer.appendChild(createGameboardForDOM(playerGameboard, document.body));
+
     // Create the ships.
     playerFleet.forEach((ship) => {
         const shipDiv = document.createElement('div');
@@ -29,8 +34,4 @@ export default async function placeShip() {
         fleetContainer.appendChild(shipDiv);
     });
     document.querySelector('body').appendChild(fleetContainer);
-    const playerGameboard = new Gameboard(10);
-
-    const gameboardContainer = document.querySelector('body');
-    gameboardContainer.appendChild(createGameboardForDOM(playerGameboard, document.body));
 }
