@@ -1,4 +1,4 @@
-export default function renderGameboard(gameboard, parentElement, isVisible) {
+export default function createGameboardForDOM(gameboard, isVisible) {
     // Create gameboard.
     const gameboardDiv = document.createElement('div');
     gameboardDiv.classList.add('gameboard');
@@ -38,6 +38,5 @@ export default function renderGameboard(gameboard, parentElement, isVisible) {
     gameboardDiv.style.gridTemplateRows = `repeat(${gameboard.grid.length}, 50px)`;
     gameboardDiv.style.gridTemplateColumns = `repeat(${gameboard.grid.length}, 50px)`;
 
-    // Put the gameboard to parent element.
-    parentElement.appendChild(gameboardDiv);
+    return gameboardDiv;
 }
