@@ -1,6 +1,6 @@
 import Gameboard from './Gameboard';
 import Ship from './Ship';
-import renderGameboard from './renderGameboard';
+import createGameboardForDOM from './createGameboardForDOM';
 
 export default async function placeShip() {
     const playerFleet = [
@@ -31,5 +31,6 @@ export default async function placeShip() {
     document.querySelector('body').appendChild(fleetContainer);
     const playerGameboard = new Gameboard(10);
 
-    renderGameboard(playerGameboard, document.body);
+    const gameboardContainer = document.querySelector('body');
+    gameboardContainer.appendChild(createGameboardForDOM(playerGameboard, document.body));
 }

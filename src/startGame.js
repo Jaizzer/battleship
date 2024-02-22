@@ -1,10 +1,13 @@
-import renderGameboard from './renderGameboard';
+import createGameboardForDOM from './createGameboardForDOM';
 import getGridCoordinatesToAttack from './getCoordinatesToAttack';
 import passDevice from './passDevice';
 
 export default async function startGame(playerA, playerB) {
     let currentTurn = playerA;
     let nextTurn = playerB;
+
+    // Access container to render gameboards.
+    const gameboardContainer = document.querySelector('body');
 
     outer: while (true) {
         // Keep choosing a grid until a grid that is currently not hit is found.
@@ -18,9 +21,9 @@ export default async function startGame(playerA, playerB) {
                 y = Math.floor(Math.random() * currentTurn.gameboard.grid.length);
             } else {
                 // Update gameboard view
-                document.body.innerHTML = '';
-                renderGameboard(nextTurn.gameboard, document.body, false);
-                renderGameboard(currentTurn.gameboard, document.body, true);
+                gameboardContainer.innerHTML = '';
+                gameboardContainer.appendChild(createGameboardForDOM(nextTurn.gameboard, false));
+                gameboardContainer.appendChild(createGameboardForDOM(currentTurn.gameboard, true));
 
                 // Access the gameboard.
                 const gameboard = document.querySelector('.gameboard');
@@ -37,15 +40,15 @@ export default async function startGame(playerA, playerB) {
 
                 // Update gameboard view after every attack.
                 if (!currentTurn.isComputer) {
-                    document.body.innerHTML = '';
-                    renderGameboard(nextTurn.gameboard, document.body, false);
-                    renderGameboard(currentTurn.gameboard, document.body, true);
+                    gameboardContainer.innerHTML = '';
+                    gameboardContainer.appendChild(createGameboardForDOM(nextTurn.gameboard, false));
+                    gameboardContainer.appendChild(createGameboardForDOM(currentTurn.gameboard, true));
                 } else {
                     // Add 1 second delay to show sequential attack moves of the computer if it hit a ship.
                     await new Promise((resolve) => setTimeout(resolve, 1000));
                     document.body.innerHTML = '';
-                    renderGameboard(currentTurn.gameboard, document.body, false);
-                    renderGameboard(nextTurn.gameboard, document.body, true);
+                    gameboardContainer.appendChild(createGameboardForDOM(currentTurn.gameboard, false));
+                    gameboardContainer.appendChild(createGameboardForDOM(nextTurn.gameboard, true));
                 }
 
                 // Ship is hit.
