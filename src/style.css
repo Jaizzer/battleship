@@ -71,7 +71,8 @@ body {
 }
 
 .ship {
-    border: 1px solid blue;
+    background-color: grey;
+    border: 0px;
 }
 
 .ship.size-1.vertical {
@@ -103,4 +104,13 @@ body {
 .ship.size-4.horizontal {
     height: 50px;
     width: 200px;
+}
+
+.gameboard-grid {
+    position: relative;
+}
+
+.gameboard .ship {
+    position: absolute;
+    z-index: 10;
 }
