@@ -51,7 +51,7 @@ export default async function placeShip() {
                         // Put the ship starting from currently selected grid.
                         grid.appendChild(selected);
                     } catch (error) {
-                        return;
+                        alert(error);
                     }
 
                     // Clear event listeners to all grid after a ship is succesfully dropped to a particular grid to prevent muliple attachment of event grids.
