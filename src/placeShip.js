@@ -47,12 +47,12 @@ export default async function placeShip() {
                     try {
                         let [x, y] = grid.id.split('-');
                         playerGameboard.placeShip(ship, [parseInt(x), parseInt(y)]);
+
+                        // Put the ship starting from currently selected grid.
+                        grid.appendChild(selected);
                     } catch (error) {
                         return;
                     }
-
-                    // Put the ship starting from currently selected grid.
-                    grid.appendChild(selected);
 
                     // Clear event listeners to all grid after a ship is succesfully dropped to a particular grid to prevent muliple attachment of event grids.
                     grids.forEach((currentGrid) => {
