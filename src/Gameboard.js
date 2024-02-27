@@ -77,6 +77,20 @@ export default class Gameboard {
         this.fleet.push(Ship);
     }
 
+    removeShipAt([x, y]) {
+        // Check if starting location contains a ship.
+        const selectedShip = this.grid[x][y].ship;
+        if (selectedShip !== null) {
+            this.grid.forEach((gridRow) => {
+                gridRow.forEach((gridColumn) => {
+                    if (gridColumn.ship === selectedShip) {
+                        gridColumn.ship = null;
+                    }
+                });
+            });
+        }
+    }
+
     isFleetSunk() {
         return this.fleet.every((ship) => ship.isSunk());
     }

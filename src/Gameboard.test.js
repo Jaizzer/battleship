@@ -224,3 +224,32 @@ test('isFleetSunk() returns false if not all ships were sunk', () => {
     }
     expect(gameboard.isFleetSunk()).toBe(false);
 });
+
+test('removeShip() removes a ship in the gameboard', () => {
+    // Create gameboard.
+    const boardSize = 10;
+    const gameboard = new Gameboard(boardSize);
+
+    // Create ship A.
+    const shipA = new Ship(3, 'vertical');
+    const shipB = new Ship(3, 'vertical');
+
+    // Place the ship A and B.
+    gameboard.placeShip(shipA, [0, 0]);
+    gameboard.placeShip(shipB, [0, 2]);
+
+    // Remove ship A and B.
+    gameboard.removeShipAt([0, 0]);
+    gameboard.removeShipAt([0, 2]);
+
+    expect(
+        [
+            gameboard.grid[0][0].ship,
+            gameboard.grid[1][0].ship,
+            gameboard.grid[1][0].ship,
+            gameboard.grid[0][2].ship,
+            gameboard.grid[1][2].ship,
+            gameboard.grid[2][2].ship,
+        ].every((grid) => grid === null)
+    ).toBe(true);
+});
