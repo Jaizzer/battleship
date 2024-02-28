@@ -32,7 +32,14 @@ export default async function placeShip() {
         shipDiv.classList.add('ship', `size-${ship.length}`, `${ship.orientation}`);
         shipDiv.draggable = true;
 
-        shipDiv.addEventListener('dragstart', () => {
+        shipDiv.addEventListener('dragstart', (event) => {
+            // Set the cursor position to the bottom-left corner of the ship div.
+            const offsetX = 15;
+            const offsetY = shipDiv.clientHeight - 20;
+
+            // Set the drag image offset to the cursor position.
+            event.dataTransfer.setDragImage(shipDiv, offsetX, offsetY);
+
             // Get the current ship being dragged.
             let selected = shipDiv;
 
