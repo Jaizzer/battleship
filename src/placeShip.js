@@ -33,6 +33,12 @@ export default async function placeShip() {
         shipDiv.draggable = true;
 
         shipDiv.addEventListener('dragstart', (event) => {
+            if (shipDiv.parentElement.classList.contains('gameboard-grid')) {
+                // If the ship being  dragged is already on the grid, remove it from the gameboard.
+                const [x, y] = shipDiv.parentElement.id.split('-');
+                playerGameboard.removeShipAt([parseInt(x), parseInt(y)]);
+            }
+
             // Set the cursor position to the bottom-left corner of the ship div.
             const offsetX = 15;
             const offsetY = shipDiv.clientHeight - 20;
