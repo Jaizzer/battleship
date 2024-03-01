@@ -78,7 +78,6 @@ export default async function placeShip() {
             grids.forEach((currentGrid) => {
                 // Create a copy of a grid with no event listener.
                 const noEventListenerGrid = currentGrid.cloneNode(true);
-                console.log(noEventListenerGrid);
                 // Don't replace the ship inside the grid to preserve the ship's dragstart event.
                 if (currentGrid.firstChild) {
                     const originalShip = currentGrid.firstChild;
