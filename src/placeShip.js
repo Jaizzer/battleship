@@ -66,24 +66,29 @@ export default async function placeShip() {
                     } catch (error) {
                         alert(error);
                     }
-
-                    // Clear event listeners to all grid after a ship is succesfully dropped to a particular grid to prevent muliple attachment of event grids.
-                    grids.forEach((currentGrid) => {
-                        // Create a copy of a grid with no event listener.
-                        const noEventListenerGrid = currentGrid.cloneNode(true);
-                        console.log(noEventListenerGrid);
-
-                        // Don't replace the ship inside the grid to preserve the ship's dragstart event.
-                        if (currentGrid.firstChild) {
-                            const originalShip = currentGrid.firstChild;
-                            noEventListenerGrid.replaceChild(originalShip, noEventListenerGrid.firstChild);
-                        }
-                        // Put the grid with no event listener to the gameboard.
-                        currentGrid.parentNode.replaceChild(noEventListenerGrid, currentGrid);
-                    });
                 });
             });
         });
+
+        shipDiv.addEventListener('dragend', () => {
+            // Access all the grids in the gameboard.
+            let grids = [...gameboardForDOM.childNodes];
+
+            // Clear event listeners to all grid after a ship is succesfully dropped to a particular grid to prevent muliple attachment of event grids.
+            grids.forEach((currentGrid) => {
+                // Create a copy of a grid with no event listener.
+                const noEventListenerGrid = currentGrid.cloneNode(true);
+                console.log(noEventListenerGrid);
+                // Don't replace the ship inside the grid to preserve the ship's dragstart event.
+                if (currentGrid.firstChild) {
+                    const originalShip = currentGrid.firstChild;
+                    noEventListenerGrid.replaceChild(originalShip, noEventListenerGrid.firstChild);
+                }
+                // Put the grid with no event listener to the gameboard.
+                currentGrid.parentNode.replaceChild(noEventListenerGrid, currentGrid);
+            });
+        });
+
         fleetContainer.appendChild(shipDiv);
     });
     document.querySelector('body').appendChild(fleetContainer);
