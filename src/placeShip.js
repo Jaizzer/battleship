@@ -33,12 +33,6 @@ export default async function placeShip() {
         shipDiv.draggable = true;
 
         shipDiv.addEventListener('dragstart', (event) => {
-            if (shipDiv.parentElement.classList.contains('gameboard-grid')) {
-                // If the ship being  dragged is already on the grid, remove it from the gameboard.
-                const [x, y] = shipDiv.parentElement.id.split('-');
-                playerGameboard.removeShipAt([parseInt(x), parseInt(y)]);
-            }
-
             // Set the cursor position to the bottom-left corner of the ship div.
             const offsetX = 15;
             const offsetY = shipDiv.clientHeight - 20;
@@ -49,6 +43,9 @@ export default async function placeShip() {
             // Get the current ship being dragged.
             let selected = shipDiv;
 
+            // Store reference to the ships current grid container.
+            const currentGridContainer = shipDiv.parentElement;
+
             // Access all the grids in the gameboard.
             let grids = [...gameboardForDOM.childNodes];
             grids.forEach((grid) => {
@@ -58,8 +55,16 @@ export default async function placeShip() {
                 grid.addEventListener('drop', () => {
                     // Don't drop ship is location is invalid.
                     try {
-                        let [x, y] = grid.id.split('-');
-                        playerGameboard.placeShip(ship, [parseInt(x), parseInt(y)]);
+                        // If the ship that was dropped came from a previous grid, remove the ship from that previous grid
+                        if (currentGridContainer !== null && currentGridContainer.classList.contains('gameboard-grid')) {
+                            // Get previous grid's coordinates.
+                            const [previousX, previousY] = currentGridContainer.id.split('-');
+                            playerGameboard.removeShipAt([parseInt(previousX), parseInt(previousY)]);
+                        }
+
+                        // Place the ship to the new grid container.
+                        let [newX, newY] = grid.id.split('-');
+                        playerGameboard.placeShip(ship, [parseInt(newX), parseInt(newY)]);
 
                         // Put the ship starting from currently selected grid.
                         grid.appendChild(selected);
