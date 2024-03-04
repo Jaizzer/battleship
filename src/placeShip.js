@@ -69,6 +69,12 @@ export default async function placeShip() {
                         // Put the ship starting from currently selected grid.
                         grid.appendChild(selected);
                     } catch (error) {
+                        // Place the ship back to its previous grid if the ship dropping attempt failed on the new grid
+                        if (currentGridContainer !== null && currentGridContainer.classList.contains('gameboard-grid')) {
+                            // Get previous grid's coordinates.
+                            const [previousX, previousY] = currentGridContainer.id.split('-');
+                            playerGameboard.placeShip(ship, [parseInt(previousX), parseInt(previousY)]);
+                        }
                         alert(error);
                     }
                 });
