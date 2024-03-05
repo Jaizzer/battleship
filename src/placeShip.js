@@ -46,6 +46,11 @@ export default async function placeShip() {
             // Store reference to the ships current grid container
             const currentGridContainer = shipDiv.parentElement;
 
+            // Get previous grid's coordinates.
+            const [previousX, previousY] = currentGridContainer.id.split('-');
+
+            const isShipCurrentlyOnGameboard = currentGridContainer.classList.contains('gameboard-grid');
+
             // Access all the grids in the gameboard.
             let grids = [...gameboardForDOM.childNodes];
             grids.forEach((grid) => {
@@ -53,14 +58,10 @@ export default async function placeShip() {
                     event.preventDefault();
                 });
                 grid.addEventListener('drop', () => {
-                    const isShipCurrentlyOnGameboard = currentGridContainer.classList.contains('gameboard-grid');
-
                     // Don't drop ship if location is invalid
                     try {
                         // If the ship that was dropped came from a previous grid, remove the ship from that previous grid
                         if (currentGridContainer !== null && isShipCurrentlyOnGameboard) {
-                            // Get previous grid's coordinates.
-                            const [previousX, previousY] = currentGridContainer.id.split('-');
                             playerGameboard.removeShipAt([parseInt(previousX), parseInt(previousY)]);
                         }
 
@@ -73,8 +74,6 @@ export default async function placeShip() {
                     } catch (error) {
                         // Place the ship back to its previous grid if the ship dropping attempt failed on the new grid
                         if (currentGridContainer !== null && isShipCurrentlyOnGameboard) {
-                            // Get previous grid's coordinates.
-                            const [previousX, previousY] = currentGridContainer.id.split('-');
                             playerGameboard.placeShip(ship, [parseInt(previousX), parseInt(previousY)]);
                         }
                         alert(error);
