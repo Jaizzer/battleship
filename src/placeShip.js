@@ -80,6 +80,17 @@ export default async function placeShip() {
                     }
                 });
             });
+
+            fleetContainer.addEventListener('dragover', (event) => {
+                event.preventDefault();
+            });
+            fleetContainer.addEventListener('drop', () => {
+                // If the ship that was dropped came from a previous grid, remove the ship from that previous grid
+                if (currentGridContainer !== null && isShipCurrentlyOnGameboard) {
+                    playerGameboard.removeShipAt([parseInt(previousX), parseInt(previousY)]);
+                }
+                fleetContainer.appendChild(selected);
+            });
         });
 
         shipDiv.addEventListener('dragend', () => {
