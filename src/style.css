@@ -116,3 +116,8 @@ body {
     position: absolute;
     z-index: 10;
 }
+
+.dragging {
+    transition: 0.01s;
+    transform: translateX(-9999px);
+}
