@@ -33,6 +33,9 @@ export default async function placeShip() {
         shipDiv.draggable = true;
 
         shipDiv.addEventListener('dragstart', (event) => {
+            // Add class indicating  that current ship is being dragged
+            event.target.classList.add('dragging');
+
             // Set the cursor position to the bottom-left corner of the ship div
             const offsetX = 15;
             const offsetY = shipDiv.clientHeight - 20;
@@ -93,7 +96,10 @@ export default async function placeShip() {
             });
         });
 
-        shipDiv.addEventListener('dragend', () => {
+        shipDiv.addEventListener('dragend', (event) => {
+            // Remove class indicating that the current ship has stopped being dragged.
+            event.target.classList.remove('dragging');
+
             // Access all the grids in the gameboard.
             let grids = [...gameboardForDOM.childNodes];
 
