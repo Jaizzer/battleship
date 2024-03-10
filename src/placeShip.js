@@ -19,6 +19,7 @@ export default async function placeShip() {
     // Create fleet container.
     const fleetContainer = document.createElement('div');
     fleetContainer.classList.add('fleet-container');
+    document.querySelector('body').appendChild(fleetContainer);
 
     const playerGameboard = new Gameboard(10);
 
@@ -119,5 +120,4 @@ export default async function placeShip() {
 
         fleetContainer.appendChild(shipDiv);
     });
-    document.querySelector('body').appendChild(fleetContainer);
 }
