@@ -17,7 +17,7 @@ export default async function placeShip() {
     ];
 
     // Create fleet container.
-    const fleetContainer = document.createElement('div');
+    let fleetContainer = document.createElement('div');
     fleetContainer.classList.add('fleet-container');
     document.querySelector('body').appendChild(fleetContainer);
 
@@ -116,6 +116,24 @@ export default async function placeShip() {
                 // Put the grid with no event listener to the gameboard
                 currentGrid.parentNode.replaceChild(noEventListenerGrid, currentGrid);
             });
+
+            // Create function that removes fleet container's event listeners
+            const removeFleetContainerEventListener = function () {
+                // Replace the original fleet container with a copy that has no event listeners.
+                const noEventListenerFleetContainer = fleetContainer.cloneNode(false);
+                fleetContainer.parentNode.replaceChild(noEventListenerFleetContainer, fleetContainer);
+
+                // Retain the original ships inside the original fleet container.
+                [...fleetContainer.childNodes].forEach((ship) => {
+                    noEventListenerFleetContainer.appendChild(ship);
+                });
+
+                // Set the cloned fleet container as now the original fleet container
+                fleetContainer = noEventListenerFleetContainer;
+            };
+
+            // Remove fleet container event listener everytime drag ends to prevent stacking multiple event listener
+            removeFleetContainerEventListener();
         });
 
         fleetContainer.appendChild(shipDiv);
