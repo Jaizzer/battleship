@@ -139,3 +139,18 @@ export default async function placeShip() {
         fleetContainer.appendChild(shipDiv);
     });
 }
+
+// Create a copy of node with with no event listener including or excluding the children nodes' event listeners.
+function createCopyWithNoEventListener(element, boolean) {
+    // Create a copy of the original element with no event listener
+    const noEventListenerElement = element.cloneNode(false);
+
+    // Retain the original children
+    if (boolean) {
+        [...element.childNodes].forEach((child) => {
+            noEventListenerElement.appendChild(child);
+        });
+    }
+
+    return noEventListenerElement;
+}
