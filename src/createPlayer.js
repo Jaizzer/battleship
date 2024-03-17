@@ -19,7 +19,7 @@ export default function createPlayer(playerIsComputer) {
     ];
 
     // Create the gameboard.
-    const playerGameboard = randomlyPlaceFleet(playerFleet, new Gameboard(10));
+    let playerGameboard = randomlyPlaceFleet(playerFleet, new Gameboard(10));
 
     if (!playerIsComputer) {
         // If player is not computer, render the form.
