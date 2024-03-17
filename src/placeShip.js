@@ -1,6 +1,7 @@
 import Gameboard from './Gameboard';
 import Ship from './Ship';
 import createGameboardForDOM from './createGameboardForDOM';
+import randomlyPlaceFleet from './randomlyPlaceFleet';
 
 export default async function placeShip() {
     const playerFleet = [
@@ -127,6 +128,40 @@ export default async function placeShip() {
             // Reassign the fleet container to the new fleet container.
             fleetContainer = eventlessFleetContainer;
         });
+    });
+
+    // Create random button that randomly places the ships on the gameboard
+    const randomButton = document.createElement('button');
+    randomButton.classList.add('random');
+    randomButton.textContent = 'Random';
+    document.body.append(randomButton);
+    randomButton.addEventListener('click', () => {
+        // Create a reference gameboard with randomly place ships
+        const randomGameboardReference = randomlyPlaceFleet(playerFleet, new Gameboard(10));
+
+        // Copy ship placements of randomGameboardReference to the playerGameboard
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+                if (randomGameboardReference.grid[i][j].ship) {
+                    const currentShip = randomGameboardReference.grid[i][j].ship;
+                    try {
+                        playerGameboard.placeShip(currentShip, [i, j]);
+
+                        // Find the same ship in the fleet container that matches the current target ship (same size, same orientation) on randomGameboardReference
+                        const shipNode = [...fleetContainer.childNodes].find((ship) => {
+                            return ship.classList.contains(`size-${currentShip.length}`) && ship.classList.contains(`${currentShip.orientation}`);
+                        });
+
+                        // Move the ship from the fleet container to the gameboard
+                        fleetContainer.removeChild(shipNode);
+                        const currentGrid = document.getElementById(`${i}-${j}`);
+                        currentGrid.appendChild(shipNode);
+                    } catch (error) {
+                        continue;
+                    }
+                }
+            }
+        }
     });
 
     return new Promise((resolve) => {
