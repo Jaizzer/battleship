@@ -128,6 +128,25 @@ export default async function placeShip() {
             fleetContainer = eventlessFleetContainer;
         });
     });
+
+    return new Promise((resolve) => {
+        // Create done button that returns the gameboard containing the ship placement
+        const doneButton = document.createElement('button');
+        doneButton.classList.add('done');
+        doneButton.textContent = 'Done';
+        document.querySelector('body').appendChild(doneButton);
+
+        doneButton.addEventListener('click', () => {
+            const thereAreShipsLeft = [...fleetContainer.childNodes].length === 0;
+
+            // Return the gameboard only if all ships are placed.
+            if (thereAreShipsLeft) {
+                resolve(playerGameboard);
+            } else {
+                alert('You must place all the ships on the gameboard!');
+            }
+        });
+    });
 }
 
 // Create a copy of node with with no event listener including or excluding the children nodes' event listeners.
