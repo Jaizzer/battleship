@@ -130,7 +130,7 @@ body {
 }
 
 .gameboard-grid {
-    border: 1px solid grey;
+    border: 1px solid rgb(223, 223, 223);
 }
 
 .gameboard-grid.occupied {
@@ -138,7 +138,7 @@ body {
 }
 
 .gameboard-grid {
-    background-color: black;
+    background-color: white;
     display: grid;
     align-items: flex-end;
 }
@@ -193,12 +193,12 @@ body {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    background-color: black;
+    background-color: white;
     padding: 10px;
 }
 
 .ship {
-    background-color: white;
+    background-color: rgb(223, 223, 223);
     border: 0px;
 }
 
