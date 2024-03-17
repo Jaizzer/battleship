@@ -38,7 +38,9 @@ body {
 
 .game-mode-prompt > div {
     padding: 10px;
+}
 
+.game-mode-prompt > div:not(.title) {
     border: 2px solid white;
     border-radius: 15px;
 
