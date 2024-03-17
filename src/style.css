@@ -18,12 +18,15 @@ body {
 }
 
 .game-mode-prompt {
-    justify-self: center;
-    align-self: center;
     width: 300px;
     padding: 30px;
-    border: 1px solid white;
+
     border-radius: 30px;
+    border: 1px solid white;
+
+    justify-self: center;
+    align-self: center;
+
     display: grid;
     justify-content: center;
     align-content: center;
