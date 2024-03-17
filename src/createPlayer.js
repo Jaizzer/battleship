@@ -2,8 +2,9 @@ import Gameboard from './Gameboard';
 import Player from './Player';
 import randomlyPlaceFleet from './randomlyPlaceFleet';
 import Ship from './Ship';
+import placeShip from './placeShip';
 
-export default function createPlayer(playerIsComputer) {
+export default async function createPlayer(playerIsComputer) {
     // Create the fleet of the player.
     const playerFleet = [
         new Ship(1, 'vertical'),
@@ -61,7 +62,7 @@ export default function createPlayer(playerIsComputer) {
         form.appendChild(submitButton);
 
         return new Promise((resolve) => {
-            form.addEventListener('submit', (event) => {
+            form.addEventListener('submit', async (event) => {
                 // Prevent form submission from reloading the page.
                 event.preventDefault();
 
@@ -70,6 +71,8 @@ export default function createPlayer(playerIsComputer) {
 
                 // Get player name from the form.
                 const playerName = nameInput.value;
+
+                playerGameboard = await placeShip();
 
                 resolve(new Player(playerName, playerGameboard, playerIsComputer));
             });
