@@ -14,14 +14,14 @@ export default async function runGame() {
     switch (currentGameMode) {
         case 'single-player-1-device':
             // Create 1 human player and 1 computer.
-            player1 = await createPlayer(false);
-            player2 = await createPlayer(true);
+            player1 = await createPlayer(false, 'Player 1');
+            player2 = await createPlayer(true, 'Player 2');
             break;
 
         case 'multiplayer-1-device':
             // Create two player that are both 'human.
-            player1 = await createPlayer(false);
-            player2 = await createPlayer(false);
+            player1 = await createPlayer(false, 'Player 1');
+            player2 = await createPlayer(false, 'Player 2');
             break;
     }
 
