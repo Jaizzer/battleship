@@ -17,7 +17,8 @@ body {
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
 
-.game-mode-prompt {
+.game-mode-prompt,
+.player-creation-prompt {
     width: 300px;
     padding: 30px;
 
@@ -28,7 +29,9 @@ body {
 
     justify-self: center;
     align-self: center;
+}
 
+.game-mode-prompt {
     display: grid;
     justify-content: center;
     align-content: center;
