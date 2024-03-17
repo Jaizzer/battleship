@@ -45,6 +45,7 @@ export default async function createPlayer(playerIsComputer, titleText) {
         nameInput.id = 'name';
         nameInput.type = 'text';
         nameInput.maxLength = 10;
+        nameInput.required = true;
         nameInput.placeholde = 'Player Name';
         form.appendChild(nameInput);
 
