@@ -3,9 +3,12 @@ body {
     display: grid;
     width: 100vw;
     height: 100vh;
+    display: grid;
 }
 
 .game-mode-prompt {
+    justify-self: center;
+    align-self: center;
     width: 300px;
     height: 300px;
     border: 1px solid white;
