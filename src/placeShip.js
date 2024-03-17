@@ -16,18 +16,20 @@ export default async function placeShip() {
         new Ship(4, 'horizontal'),
     ];
 
-    // Create fleet container.
+    // Create fleet container
     let fleetContainer = document.createElement('div');
     fleetContainer.classList.add('fleet-container');
     document.querySelector('body').appendChild(fleetContainer);
 
+    // Initialize the gameboard
     const playerGameboard = new Gameboard(10);
 
+    // Render gameboard on the DOM
     const gameboardContainer = document.querySelector('body');
     const gameboardForDOM = createGameboardForDOM(playerGameboard, document.body);
     gameboardContainer.appendChild(gameboardForDOM);
 
-    // Create the ships.
+    // Create the ships
     playerFleet.forEach((ship) => {
         const shipDiv = document.createElement('div');
         shipDiv.classList.add('ship', `size-${ship.length}`, `${ship.orientation}`);
@@ -44,39 +46,41 @@ export default async function placeShip() {
             // Set the drag image offset to the cursor position
             event.dataTransfer.setDragImage(shipDiv, offsetX, offsetY);
 
-            // Get the current ship being dragged.
+            // Get the current ship being dragged
             let selected = shipDiv;
 
             // Store reference to the ships current grid container
             const currentGridContainer = shipDiv.parentElement;
 
-            // Get previous grid's coordinates.
+            // Get ships current parent grid's coordinates
             const [previousX, previousY] = currentGridContainer.id.split('-');
 
+            // Check if the ship is inside a grid
             const isShipCurrentlyOnGameboard = currentGridContainer.classList.contains('gameboard-grid');
 
-            // Access all the grids in the gameboard.
+            // Access all the grids in the gameboard
             let grids = [...gameboardForDOM.childNodes];
+
+            // Add drag and drop events to the grids
             grids.forEach((grid) => {
                 grid.addEventListener('dragover', (event) => {
                     event.preventDefault();
                 });
                 grid.addEventListener('drop', () => {
-                    // Don't drop ship if location is invalid
                     try {
-                        // If the ship that was dropped came from a previous grid, remove the ship from that previous grid
+                        // If the ship that was dropped came from another grid, remove the ship from that grid
                         if (currentGridContainer !== null && isShipCurrentlyOnGameboard) {
                             playerGameboard.removeShipAt([parseInt(previousX), parseInt(previousY)]);
                         }
 
-                        // Place the ship to the new grid container
+                        // Place the ship to the new grid
                         let [newX, newY] = grid.id.split('-');
                         playerGameboard.placeShip(ship, [parseInt(newX), parseInt(newY)]);
 
-                        // Put the ship starting from currently selected grid
+                        // Render ship placement on the new grid
                         grid.appendChild(selected);
                     } catch (error) {
-                        // Place the ship back to its previous grid if the ship dropping attempt failed on the new grid
+                        // Place the ship back to its current parent grid if the ship dropping attempt failed on the new target grid
                         if (currentGridContainer !== null && isShipCurrentlyOnGameboard) {
                             playerGameboard.placeShip(ship, [parseInt(previousX), parseInt(previousY)]);
                         }
@@ -85,6 +89,7 @@ export default async function placeShip() {
                 });
             });
 
+            // Add drag and drop event to the fleet container so that ship can be put back outside the grid
             fleetContainer.addEventListener('dragover', (event) => {
                 event.preventDefault();
             });
@@ -93,6 +98,7 @@ export default async function placeShip() {
                 if (currentGridContainer !== null && isShipCurrentlyOnGameboard) {
                     playerGameboard.removeShipAt([parseInt(previousX), parseInt(previousY)]);
                 }
+                // Render ship placement on the fleet container
                 fleetContainer.appendChild(selected);
             });
         });
@@ -104,19 +110,22 @@ export default async function placeShip() {
             // Access all the grids in the gameboard.
             let grids = [...gameboardForDOM.childNodes];
 
-            // Clear event listeners to all grid after a ship is succesfully dropped to a particular grid to prevent muliple attachment of event grids
+            // Clear event listeners on all grid after a ship is  dropped to a particular grid to prevent muliple event listeners from stacking up on the grids
             grids.forEach((currentGrid) => {
-                // Create a copy of a grid with no event listener
+                // Create a copy of a grid with no event listener (excluding the children nodes' event listeners)
                 const eventlessGrid = createCopyWithNoEventListener(currentGrid, true);
                 currentGrid.parentNode.replaceChild(eventlessGrid, currentGrid);
             });
 
-            // Clear all event listeners in the fleet container to prevent events from stacking together.
+            // Clear all event listeners in the fleet container to prevent events from stacking together (excluding the children nodes' event listeners)
             const eventlessFleetContainer = createCopyWithNoEventListener(fleetContainer, true);
+
+            // Render new fleet container on DOM
             fleetContainer.parentNode.replaceChild(eventlessFleetContainer, fleetContainer);
+
+            // Reassign the fleet container to the new fleet container.
             fleetContainer = eventlessFleetContainer;
         });
-
         fleetContainer.appendChild(shipDiv);
     });
 }
