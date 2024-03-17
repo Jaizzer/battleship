@@ -4,7 +4,7 @@ import randomlyPlaceFleet from './randomlyPlaceFleet';
 import Ship from './Ship';
 import placeShip from './placeShip';
 
-export default async function createPlayer(playerIsComputer, headingText) {
+export default async function createPlayer(playerIsComputer, titleText) {
     // Create the fleet of the player.
     const playerFleet = [
         new Ship(1, 'vertical'),
@@ -30,16 +30,10 @@ export default async function createPlayer(playerIsComputer, headingText) {
         playerCreationPrompt.classList.add('player-creation-prompt');
         document.body.appendChild(playerCreationPrompt);
 
-        // Create the form heading
-        const heading = document.createElement('div');
-        heading.classList.add('heading');
-        heading.textContent = headingText;
-        playerCreationPrompt.appendChild(heading);
-
         // Create prompt title.
         const title = document.createElement('div');
         title.classList.add('title');
-        title.innerHTML = `Choose Username`;
+        title.innerHTML = titleText;
         playerCreationPrompt.appendChild(title);
 
         // Create the form.
