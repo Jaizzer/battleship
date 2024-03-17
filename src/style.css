@@ -5,6 +5,17 @@ body {
     height: 100vh;
 }
 
+.game-mode-prompt {
+    width: 300px;
+    height: 300px;
+    border: 1px solid white;
+    border-radius: 30px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-rows: repeat(3, 50px);
+}
+
 .gameboard {
     display: grid;
     width: 500px;
