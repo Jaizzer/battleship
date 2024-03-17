@@ -202,6 +202,8 @@ export default async function placeShip() {
 
             // Return the gameboard only if all ships are placed.
             if (thereAreShipsLeft) {
+                // Clear the DOM
+                document.body.innerHTML = '';
                 resolve(playerGameboard);
             } else {
                 alert('You must place all the ships on the gameboard!');
