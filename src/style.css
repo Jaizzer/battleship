@@ -43,10 +43,16 @@ body {
 .game-mode-prompt > div:not(.title) {
     border-radius: 15px;
 
+    background-color: rgb(235, 235, 235);
+
     display: grid;
     grid-template-columns: 20px auto;
     align-items: center;
     gap: 10px;
+}
+
+.game-mode-prompt > div:not(.title):hover {
+    background-color: rgb(223, 223, 223);
 }
 
 .game-mode-prompt .title {
