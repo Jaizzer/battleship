@@ -159,6 +159,9 @@ export default async function placeShip() {
     randomButton.textContent = 'Random';
     document.body.append(randomButton);
     randomButton.addEventListener('click', () => {
+        // Reset gameboard first.
+        resetButton.click();
+
         // Create a reference gameboard with randomly place ships
         const randomGameboardReference = randomlyPlaceFleet(playerFleet, new Gameboard(10));
 
