@@ -130,6 +130,29 @@ export default async function placeShip() {
         });
     });
 
+    // Create reset button that returns ships back to fleet container
+    const resetButton = document.createElement('button');
+    resetButton.classList.add('reset');
+    resetButton.textContent = 'Reset';
+    document.body.appendChild(resetButton);
+
+    resetButton.addEventListener('click', () => {
+        // Remove all ships on the gameboard object
+        playerGameboard.clear();
+
+        // Move ships from the gameboard back to the fleet container
+        for (let i = 0; i < 10; i++) {
+            for (let j = 0; j < 10; j++) {
+                [...gameboardForDOM.childNodes].forEach((grid) => {
+                    if (grid.firstChild) {
+                        fleetContainer.appendChild(grid.firstChild);
+                    }
+                    grid.innerHTML = '';
+                });
+            }
+        }
+    });
+
     // Create random button that randomly places the ships on the gameboard
     const randomButton = document.createElement('button');
     randomButton.classList.add('random');
