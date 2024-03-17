@@ -10,35 +10,25 @@ export default async function getGameMode(gameModes) {
     promptTitle.textContent = 'Choose Game Mode';
     gameModePromptContainer.appendChild(promptTitle);
 
-    // Create a form for selecting game modes.
-    const form = document.createElement('form');
-    gameModePromptContainer.appendChild(form);
-
-    // Create the select element to contain the game mode choices.
-    const select = document.createElement('select');
-    form.appendChild(select);
-
-    // Put the gamemode as option inside select element.
+    // Create divs corresponding to different game modes
+    const gameModeDivs = [];
     gameModes.forEach((gameMode) => {
-        const option = document.createElement('option');
-        option.value = gameMode;
+        const gameModeDiv = document.createElement('div');
+        gameModeDiv.classList.add(gameMode);
+
         // Replace hyphens with spaces and capitalize each first word since 'gameModes' contain string that are hyphenated.
-        option.textContent = gameMode.replace(/-/g, ' ').replace(/\b\w/g, (match) => match.toUpperCase());
-        select.appendChild(option);
+        gameModeDiv.textContent = gameMode.replace(/-/g, ' ').replace(/\b\w/g, (match) => match.toUpperCase());
+        gameModePromptContainer.appendChild(gameModeDiv);
+        gameModeDivs.push(gameModeDiv);
     });
 
-    // Add the submit button to the form.
-    const submitButton = document.createElement('button');
-    submitButton.classList.add('submit-button');
-    submitButton.textContent = 'Start Game';
-    submitButton.type = 'submit';
-    form.appendChild(submitButton);
-
     return new Promise((resolve) => {
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-            document.body.innerHTML = '';
-            resolve(select.value);
+        gameModeDivs.forEach((gameModeDiv) => {
+            gameModeDiv.addEventListener('click', (event) => {
+                event.preventDefault();
+                document.body.innerHTML = '';
+                resolve(gameModeDiv.className);
+            });
         });
     });
 }
