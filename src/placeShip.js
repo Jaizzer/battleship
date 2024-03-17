@@ -34,6 +34,7 @@ export default async function placeShip() {
         const shipDiv = document.createElement('div');
         shipDiv.classList.add('ship', `size-${ship.length}`, `${ship.orientation}`);
         shipDiv.draggable = true;
+        fleetContainer.appendChild(shipDiv);
 
         shipDiv.addEventListener('dragstart', (event) => {
             // Add class indicating  that current ship is being dragged
@@ -126,7 +127,6 @@ export default async function placeShip() {
             // Reassign the fleet container to the new fleet container.
             fleetContainer = eventlessFleetContainer;
         });
-        fleetContainer.appendChild(shipDiv);
     });
 }
 
