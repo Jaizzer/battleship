@@ -253,3 +253,23 @@ test('removeShip() removes a ship in the gameboard', () => {
         ].every((grid) => grid === null)
     ).toBe(true);
 });
+
+test('removeShip() removes a ship in the fleet array', () => {
+    // Create gameboard.
+    const boardSize = 10;
+    const gameboard = new Gameboard(boardSize);
+
+    // Create ship A.
+    const shipA = new Ship(3, 'vertical');
+    const shipB = new Ship(3, 'vertical');
+
+    // Place the ship A and B.
+    gameboard.placeShip(shipA, [0, 0]);
+    gameboard.placeShip(shipB, [0, 2]);
+
+    // Remove ship A and B.
+    gameboard.removeShipAt([0, 0]);
+    gameboard.removeShipAt([0, 2]);
+
+    expect(gameboard.fleet.includes(shipA) && gameboard.fleet.includes(shipB)).toBe(false);
+});

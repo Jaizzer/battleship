@@ -89,6 +89,8 @@ export default class Gameboard {
                 });
             });
         }
+        // Remove the ship in the fleet array
+        this.fleet.splice(this.fleet.indexOf(selectedShip), 1);
     }
 
     isFleetSunk() {
