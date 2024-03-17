@@ -30,6 +30,11 @@ body {
     grid-template-rows: repeat(3, 50px);
 }
 
+.game-mode-prompt .icon {
+    width: 20px;
+    height: 20px;
+}
+
 .gameboard {
     display: grid;
     width: 500px;
