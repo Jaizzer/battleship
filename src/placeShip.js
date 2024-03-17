@@ -54,7 +54,7 @@ export default async function placeShip() {
             const currentGridContainer = shipDiv.parentElement;
 
             // Get ships current parent grid's coordinates
-            const [previousX, previousY] = currentGridContainer.id.split('-');
+            const [currentX, currentY] = currentGridContainer.id.split('-');
 
             // Check if the ship is inside a grid
             const isShipCurrentlyOnGameboard = currentGridContainer.classList.contains('gameboard-grid');
@@ -71,7 +71,7 @@ export default async function placeShip() {
                     try {
                         // If the ship that was dropped came from another grid, remove the ship from that grid
                         if (currentGridContainer !== null && isShipCurrentlyOnGameboard) {
-                            playerGameboard.removeShipAt([parseInt(previousX), parseInt(previousY)]);
+                            playerGameboard.removeShipAt([parseInt(currentX), parseInt(currentY)]);
                         }
 
                         // Place the ship to the new grid
@@ -83,7 +83,7 @@ export default async function placeShip() {
                     } catch (error) {
                         // Place the ship back to its current parent grid if the ship dropping attempt failed on the new target grid
                         if (currentGridContainer !== null && isShipCurrentlyOnGameboard) {
-                            playerGameboard.placeShip(ship, [parseInt(previousX), parseInt(previousY)]);
+                            playerGameboard.placeShip(ship, [parseInt(currentX), parseInt(currentY)]);
                         }
                         alert(error);
                     }
@@ -97,7 +97,7 @@ export default async function placeShip() {
             fleetContainer.addEventListener('drop', () => {
                 // If the ship that was dropped came from a previous grid, remove the ship from that previous grid
                 if (currentGridContainer !== null && isShipCurrentlyOnGameboard) {
-                    playerGameboard.removeShipAt([parseInt(previousX), parseInt(previousY)]);
+                    playerGameboard.removeShipAt([parseInt(currentX), parseInt(currentY)]);
                 }
                 // Render ship placement on the fleet container
                 fleetContainer.appendChild(selected);
