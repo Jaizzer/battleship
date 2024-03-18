@@ -122,10 +122,63 @@ body {
     background-color: rgb(223, 223, 223);
 }
 
-.gameboard {
+.ship-placement-page-container {
     display: grid;
+    grid-template-rows: repeat(3, auto);
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+}
+
+.button-container {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+
+    align-self: center;
+}
+
+.reset {
+    grid-row: 2 / 3;
+}
+
+.random {
+    grid-row: 3 / 4;
+}
+
+.done {
+    grid-row: 4 / 5;
+}
+
+.fleet-container {
+    width: 200px;
+    height: 500px;
+
+    padding: 10px;
+
+    background-color: white;
+
+    grid-row: 3 / 5;
+    grid-column: 2 / 3;
+
+    align-self: center;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.gameboard {
+    align-self: center;
+
     width: 500px;
     height: 500px;
+
+    display: grid;
+    grid-row: 3 / 5;
+    grid-column: 1 / 2;
     /* Grid Template Rows and Columns are dynamically modified in 'renderGameboard' function inside runGame.js module */
 }
 
@@ -184,17 +237,6 @@ body {
     100% {
         transform: rotate(360deg);
     }
-}
-
-.fleet-container {
-    width: 200px;
-    align-items: center;
-    justify-content: space-around;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    background-color: white;
-    padding: 10px;
 }
 
 .ship {
