@@ -135,11 +135,16 @@ export default async function placeShip() {
         });
     });
 
+    // Create button container to hold all buttons
+    const buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('button-container');
+    shipPlacementPageContainer.appendChild(buttonContainer);
+
     // Create reset button that returns ships back to fleet container
     const resetButton = document.createElement('button');
     resetButton.classList.add('reset');
     resetButton.textContent = 'Reset';
-    shipPlacementPageContainer.appendChild(resetButton);
+    buttonContainer.appendChild(resetButton);
 
     resetButton.addEventListener('click', () => {
         // Remove all ships on the gameboard object
@@ -162,7 +167,7 @@ export default async function placeShip() {
     const randomButton = document.createElement('button');
     randomButton.classList.add('random');
     randomButton.textContent = 'Random';
-    shipPlacementPageContainer.append(randomButton);
+    buttonContainer.append(randomButton);
     randomButton.addEventListener('click', () => {
         // Reset gameboard first.
         resetButton.click();
@@ -200,7 +205,7 @@ export default async function placeShip() {
         const doneButton = document.createElement('button');
         doneButton.classList.add('done');
         doneButton.textContent = 'Done';
-        shipPlacementPageContainer.appendChild(doneButton);
+        buttonContainer.appendChild(doneButton);
 
         doneButton.addEventListener('click', () => {
             const thereAreShipsLeft = [...fleetContainer.childNodes].length === 0;
