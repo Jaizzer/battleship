@@ -4,6 +4,11 @@ import createGameboardForDOM from './createGameboardForDOM';
 import randomlyPlaceFleet from './randomlyPlaceFleet';
 
 export default async function placeShip() {
+    // Add container to hold all elements in ship placement process
+    const shipPlacementPageContainer = document.createElement('div');
+    shipPlacementPageContainer.classList.add('ship-placement-page-container');
+    document.body.appendChild(shipPlacementPageContainer);
+
     const playerFleet = [
         new Ship(1, 'vertical'),
         new Ship(1, 'vertical'),
@@ -20,14 +25,14 @@ export default async function placeShip() {
     // Create fleet container
     let fleetContainer = document.createElement('div');
     fleetContainer.classList.add('fleet-container');
-    document.querySelector('body').appendChild(fleetContainer);
+    shipPlacementPageContainer.appendChild(fleetContainer);
 
     // Initialize the gameboard
     const playerGameboard = new Gameboard(10);
 
     // Render gameboard on the DOM
-    const gameboardContainer = document.querySelector('body');
-    const gameboardForDOM = createGameboardForDOM(playerGameboard, document.body);
+    const gameboardContainer = shipPlacementPageContainer;
+    const gameboardForDOM = createGameboardForDOM(playerGameboard, shipPlacementPageContainer);
     gameboardContainer.appendChild(gameboardForDOM);
 
     // Create the ships
@@ -134,7 +139,7 @@ export default async function placeShip() {
     const resetButton = document.createElement('button');
     resetButton.classList.add('reset');
     resetButton.textContent = 'Reset';
-    document.body.appendChild(resetButton);
+    shipPlacementPageContainer.appendChild(resetButton);
 
     resetButton.addEventListener('click', () => {
         // Remove all ships on the gameboard object
@@ -157,7 +162,7 @@ export default async function placeShip() {
     const randomButton = document.createElement('button');
     randomButton.classList.add('random');
     randomButton.textContent = 'Random';
-    document.body.append(randomButton);
+    shipPlacementPageContainer.append(randomButton);
     randomButton.addEventListener('click', () => {
         // Reset gameboard first.
         resetButton.click();
@@ -195,7 +200,7 @@ export default async function placeShip() {
         const doneButton = document.createElement('button');
         doneButton.classList.add('done');
         doneButton.textContent = 'Done';
-        document.querySelector('body').appendChild(doneButton);
+        shipPlacementPageContainer.appendChild(doneButton);
 
         doneButton.addEventListener('click', () => {
             const thereAreShipsLeft = [...fleetContainer.childNodes].length === 0;
