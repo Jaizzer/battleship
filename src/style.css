@@ -202,10 +202,15 @@ body {
 }
 
 .gameboard {
+    border: 1px solid rgb(223, 223, 223);
+
     align-self: center;
 
-    width: 500px;
-    height: 500px;
+    align-content: center;
+    justify-content: center;
+
+    width: 502px;
+    height: 502px;
 
     display: grid;
     grid-row: 3 / 5;
