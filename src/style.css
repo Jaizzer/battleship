@@ -125,8 +125,11 @@ body {
 .ship-placement-page-container {
     display: grid;
     grid-template-rows: repeat(3, auto);
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto auto;
     gap: 10px;
+
+    justify-content: center;
+    align-content: center;
 }
 
 .button-container {
