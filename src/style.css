@@ -134,6 +134,37 @@ body {
     grid-row: 2 / 3;
 
     align-self: center;
+
+    display: flex;
+    gap: 10px;
+}
+
+.button-container button {
+    padding: 7px;
+
+    border: 0px;
+    border-radius: 5px;
+
+    background-color: rgb(164, 164, 164);
+
+    font-weight: 600;
+    color: white;
+}
+
+.button-container button {
+    padding: 7px;
+
+    border: 0px;
+    border-radius: 5px;
+
+    background-color: rgb(175, 175, 175);
+
+    font-weight: 600;
+    color: white;
+}
+
+.button-container button:hover {
+    background-color: rgb(156, 156, 156);
 }
 
 .reset {
