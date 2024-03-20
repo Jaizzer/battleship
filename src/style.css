@@ -219,6 +219,14 @@ body {
     /* Grid Template Rows and Columns are dynamically modified in 'renderGameboard' function inside runGame.js module */
 }
 
+.gameboard-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
 .ship-placement-page-container .gameboard {
     grid-row: 3 / 5;
     grid-column: 1 / 2;
@@ -229,7 +237,7 @@ body {
 }
 
 .gameboard-grid.occupied {
-    background-color: rgb(124, 124, 138);
+    background-color: rgb(223, 223, 223);
 }
 
 .gameboard-grid {
