@@ -246,6 +246,12 @@ body {
     align-items: flex-end;
 }
 
+#recently-attacked {
+    transition: background-color 2s ease, border-color 2s ease;
+    background-color: rgb(255, 76, 76);
+    border-color: rgb(255, 76, 76);
+}
+
 .gameboard-grid.hit {
     display: grid;
     justify-items: center;

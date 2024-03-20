@@ -46,6 +46,11 @@ export default async function startGame(playerA, playerB) {
                     gameboardContainer.appendChild(createGameboardForDOM(nextTurn.gameboard, false));
                     gameboardContainer.appendChild(createGameboardForDOM(currentTurn.gameboard, true));
                 } else {
+                    // Highlight the most recent attack by computer
+                    const ownGameboard = [...document.querySelectorAll('.gameboard')][1];
+                    const recentlyAttackedGrid = [...ownGameboard.childNodes][(9 - x) * 10 + y];
+                    recentlyAttackedGrid.id = 'recently-attacked';
+
                     // Add 1 second delay to show sequential attack moves of the computer if it hit a ship.
                     await new Promise((resolve) => setTimeout(resolve, 1000));
                     gameboardContainer.innerHTML = '';
