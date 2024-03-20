@@ -256,6 +256,7 @@ body {
     content: 'X';
     font-size: 45px;
     font-family: sans-serif;
+    color: white;
 }
 
 .gameboard-grid.empty.hit:after {
