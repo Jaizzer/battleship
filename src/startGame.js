@@ -7,7 +7,9 @@ export default async function startGame(playerA, playerB) {
     let nextTurn = playerB;
 
     // Access container to render gameboards.
-    const gameboardContainer = document.querySelector('body');
+    const gameboardContainer = document.createElement('div');
+    gameboardContainer.classList.add('gameboard-container');
+    document.body.appendChild(gameboardContainer);
 
     outer: while (true) {
         // Keep choosing a grid until a grid that is currently not hit is found.
@@ -46,7 +48,7 @@ export default async function startGame(playerA, playerB) {
                 } else {
                     // Add 1 second delay to show sequential attack moves of the computer if it hit a ship.
                     await new Promise((resolve) => setTimeout(resolve, 1000));
-                    document.body.innerHTML = '';
+                    gameboardContainer.innerHTML = '';
                     gameboardContainer.appendChild(createGameboardForDOM(currentTurn.gameboard, false));
                     gameboardContainer.appendChild(createGameboardForDOM(nextTurn.gameboard, true));
                 }
