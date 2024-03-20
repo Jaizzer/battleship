@@ -216,9 +216,12 @@ body {
     height: 502px;
 
     display: grid;
+    /* Grid Template Rows and Columns are dynamically modified in 'renderGameboard' function inside runGame.js module */
+}
+
+.ship-placement-page-container .gameboard {
     grid-row: 3 / 5;
     grid-column: 1 / 2;
-    /* Grid Template Rows and Columns are dynamically modified in 'renderGameboard' function inside runGame.js module */
 }
 
 .gameboard-grid {
