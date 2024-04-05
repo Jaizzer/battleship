@@ -7,9 +7,12 @@ export default async function startGame(playerA, playerB) {
     let nextTurn = playerB;
 
     // Access container to render gameboards.
-    const gameboardContainer = document.createElement('div');
+    let gameboardContainer = document.createElement('div');
     gameboardContainer.classList.add('gameboard-container');
     document.body.appendChild(gameboardContainer);
+
+    // Create unfilled gameboard container copy for later use
+    const gameboardContainerCopy = gameboardContainer;
 
     outer: while (true) {
         // Keep choosing a grid until a grid that is currently not hit is found.
@@ -85,6 +88,12 @@ export default async function startGame(playerA, playerB) {
         // Only show loading screen if both players are not computer
         if (!currentTurn.isComputer && !nextTurn.isComputer) {
             await passDevice(currentTurn.name);
+
+            // Remove loading screen
+            document.body.innerHTML = '';
+
+            // Render the gameboard
+            document.body.appendChild(gameboardContainerCopy);
         }
     }
 
