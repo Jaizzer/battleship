@@ -23,6 +23,11 @@ export default async function runGame() {
             player1 = await createPlayer(false, 'Player 1');
             player2 = await createPlayer(false, 'Player 2');
             break;
+
+        case 'multiplayer-2-device':
+            alert(`Feature coming soon!`);
+            // Reload page.
+            location.reload();
     }
 
     let winner = await startGame(player1, player2);
