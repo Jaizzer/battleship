@@ -107,7 +107,8 @@ body {
     grid-row: 2 / 3;
 }
 
-.player-creation-prompt button {
+.player-creation-prompt button,
+.switch {
     padding: 10px;
 
     border: 0px;
@@ -118,7 +119,8 @@ body {
     grid-row: 3 / 4;
 }
 
-.player-creation-prompt button:hover {
+.player-creation-prompt button:hover,
+.switch:hover {
     background-color: rgb(223, 223, 223);
 }
 
@@ -280,7 +282,7 @@ body {
 
 .loading-screen .icon {
     border: 16px solid #f3f3f3;
-    border-top: 16px solid black;
+    border-top: 16px solid rgb(156, 156, 156);
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -344,4 +346,21 @@ body {
 .dragging {
     transition: 0.01s;
     transform: translateX(-9999px);
+}
+
+.loading-screen {
+    padding: 30px;
+
+    border-radius: 30px;
+    border: 1px solid white;
+
+    background-color: white;
+
+    justify-self: center;
+    align-self: center;
+
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    gap: 20px;
 }
