@@ -192,7 +192,7 @@ body {
 
     background-color: white;
 
-    grid-row: 3 / 5;
+    grid-row: 3 / 4;
     grid-column: 2 / 3;
 
     align-self: center;
@@ -230,7 +230,7 @@ body {
 }
 
 .ship-placement-page-container .gameboard {
-    grid-row: 3 / 5;
+    grid-row: 3 / 4;
     grid-column: 1 / 2;
 }
 
