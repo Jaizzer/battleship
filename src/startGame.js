@@ -65,8 +65,12 @@ export default async function startGame(playerA, playerB) {
                 if (nextTurn.gameboard.grid[x][y].ship) {
                     // Terminate game if the ship hit was the last ship in the fleet.
                     if (nextTurn.gameboard.isFleetSunk()) {
+                        await new Promise((resolve) => {
+                            setTimeout(resolve, 300);
+                        });
                         break outer;
                     }
+
                     // The ship hit was not the last ship in the fleet, hence make the current player choose another target grid.
                     continue;
                 }
