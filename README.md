@@ -25,9 +25,6 @@ To play the Battleship game, simply open [Battleship](https://jaizzer.github.io/
 4. **Sink Ships:** Continue guessing until all of your opponent's ships are sunk.
 5. **Winning:** The first player to sink all of their opponent's ships wins the game.
 
-## Controls
-
-- **Mouse:** Click on the grid to guess coordinates.
 
 ## License
 
