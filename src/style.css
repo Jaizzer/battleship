@@ -5,14 +5,24 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+
+    --background-color: #1a2431;
+    --ship-color: #28394d;
+    --text-color: #b0cbcd;
+    --border-color: #233143;
+    --hover-border-color: #30445d;
+    --setup-button: #3d5472;
+    --setup-button-text: #b0cbcd;
 }
 
 body {
-    background-color: rgb(47, 43, 43);
+    background-color: var(--background-color);
     display: grid;
     width: 100vw;
     height: 100vh;
     display: grid;
+
+    color: var(--text-color);
 
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
 }
@@ -23,9 +33,9 @@ body {
     padding: 30px;
 
     border-radius: 30px;
-    border: 1px solid white;
+    border: 1px solid var(--border-color);
 
-    background-color: white;
+    background-color: var(--background-color);
 
     justify-self: center;
     align-self: center;
@@ -46,7 +56,7 @@ body {
 .game-mode-prompt > div:not(.title) {
     border-radius: 15px;
 
-    background-color: rgb(235, 235, 235);
+    background-color: var(--border-color);
 
     display: grid;
     grid-template-columns: 20px auto;
@@ -55,7 +65,7 @@ body {
 }
 
 .game-mode-prompt > div:not(.title):hover {
-    background-color: rgb(223, 223, 223);
+    background-color: var(--hover-border-color);
 }
 
 .game-mode-prompt .title {
@@ -97,9 +107,11 @@ body {
     grid-row: 1 / 2;
 }
 .player-creation-prompt input {
+    color: var(--text-color);
+    background-color: var(--background-color);
     padding: 7px 5px;
 
-    border: 1px solid rgb(235, 235, 235);
+    border: 1px solid var(--border-color);
     border-radius: 5px;
 
     font-size: 15px;
@@ -114,14 +126,15 @@ body {
     border: 0px;
     border-radius: 7px;
 
-    background-color: rgb(235, 235, 235);
+    background-color: var(--border-color);
+    color: var(--text-color);
 
     grid-row: 3 / 4;
 }
 
 .player-creation-prompt button:hover,
 .switch:hover {
-    background-color: rgb(223, 223, 223);
+    background-color: var(--hover-border-color);
 }
 
 .ship-placement-page-container {
@@ -150,26 +163,15 @@ body {
     border: 0px;
     border-radius: 5px;
 
-    background-color: rgb(164, 164, 164);
+    background-color: var(--setup-button);
+    color: var(--setup-button-text);
 
     font-weight: 600;
-    color: white;
-}
-
-.button-container button {
-    padding: 7px;
-
-    border: 0px;
-    border-radius: 5px;
-
-    background-color: rgb(175, 175, 175);
-
-    font-weight: 600;
-    color: white;
+    color: var(--text-color);
 }
 
 .button-container button:hover {
-    background-color: rgb(156, 156, 156);
+    background-color: var(--hover-border-color);
 }
 
 .reset {
@@ -190,7 +192,8 @@ body {
 
     padding: 10px;
 
-    background-color: white;
+    background-color: var(--background-color);
+    border: 2px solid var(--border-color);
 
     grid-row: 3 / 4;
     grid-column: 2 / 3;
@@ -207,7 +210,7 @@ body {
 }
 
 .gameboard {
-    border: 1px solid rgb(223, 223, 223);
+    border: 1px solid var(--border-color);
 
     align-self: center;
 
@@ -233,15 +236,15 @@ body {
 }
 
 .gameboard-grid {
-    border: 1px solid rgb(223, 223, 223);
+    border: 1px solid var(--border-color);
 }
 
 .gameboard-grid.occupied {
-    background-color: rgb(223, 223, 223);
+    background-color: var(--border-color);
 }
 
 .gameboard-grid {
-    background-color: white;
+    background-color: var(--background-color);
     display: grid;
     align-items: flex-end;
 }
@@ -272,14 +275,15 @@ body {
     content: 'X';
     font-size: 3vw;
     font-family: sans-serif;
-    color: rgb(255, 255, 255);
+    background-color: var(--border-color);
+    color: var(--text-color);
 }
 
 .gameboard-grid.empty.hit:after {
     content: '·';
     font-size: 3vw;
     font-family: sans-serif;
-    color: rgb(223, 223, 223);
+    color: var(--text-color);
 }
 
 body {
@@ -289,8 +293,8 @@ body {
 }
 
 .loading-screen .icon {
-    border: 16px solid #f3f3f3;
-    border-top: 16px solid rgb(156, 156, 156);
+    border: 16px solid var(--border-color);
+    border-top: 16px solid var(--hover-border-color);
     border-radius: 50%;
     width: 120px;
     height: 120px;
@@ -307,7 +311,7 @@ body {
 }
 
 .ship {
-    background-color: rgb(223, 223, 223);
+    background-color: var(--border-color);
     border: 0px;
 }
 
@@ -360,9 +364,9 @@ body {
     padding: 30px;
 
     border-radius: 30px;
-    border: 1px solid white;
+    border: 1px solid var(--border-color);
 
-    background-color: white;
+    background-color: var(--background-color);
 
     justify-self: center;
     align-self: center;
@@ -454,7 +458,8 @@ body {
 
     border-radius: 10px;
 
-    background-color: white;
+    background-color: var(--background-color);
+    border: 2px solid var(--border-color);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
     overflow: hidden;
@@ -484,11 +489,11 @@ body {
 
     color: white;
 
-    background-color: rgb(175, 175, 175);
+    background-color: var(--border-color);
 
     width: 100%;
 }
 
 .close:hover {
-    background-color: rgb(223, 223, 223);
+    background-color: var(--hover-border-color);
 }
