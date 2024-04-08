@@ -24,7 +24,7 @@ export default function popUpMessage(messageHeading, message) {
     // Create close button.
     const closeButton = document.createElement('button');
     closeButton.classList.add('close');
-    closeButton.textContent = 'Back to Game';
+    closeButton.textContent = 'Continue';
     messageContainer.appendChild(closeButton);
 
     // Add event listener to the close div
