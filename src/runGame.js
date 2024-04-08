@@ -1,6 +1,7 @@
 import startGame from './startGame';
 import getGameMode from './getGameMode';
 import createPlayer from './createPlayer';
+import popUpMessage from './popUpMessage';
 
 export default async function runGame() {
     const gameModes = ['single-player-1-device', 'multiplayer-1-device', 'multiplayer-2-device'];
@@ -25,12 +26,24 @@ export default async function runGame() {
             break;
 
         case 'multiplayer-2-device':
-            alert(`Feature coming soon!`);
-            // Reload page.
-            location.reload();
+            popUpMessage('Sorry', `This feature is currently not available`);
+            const closeButton = document.querySelector('.close');
+            await new Promise((resolve) => {
+                closeButton.addEventListener('click', () => {
+                    location.reload();
+                    resolve();
+                });
+            });
     }
 
     let winner = await startGame(player1, player2);
 
-    alert(`${winner.name} won!`);
+    popUpMessage('Game Ended', `${winner.name} won!`);
+    const closeButton = document.querySelector('.close');
+    await new Promise((resolve) => {
+        closeButton.addEventListener('click', () => {
+            location.reload();
+            resolve();
+        });
+    });
 }

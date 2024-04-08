@@ -1,6 +1,7 @@
 import Gameboard from './Gameboard';
 import Ship from './Ship';
 import createGameboardForDOM from './createGameboardForDOM';
+import popUpMessage from './popUpMessage';
 import randomlyPlaceFleet from './randomlyPlaceFleet';
 
 export default async function placeShip() {
@@ -91,7 +92,7 @@ export default async function placeShip() {
                         if (currentGridContainer !== null && isShipCurrentlyOnGameboard) {
                             playerGameboard.placeShip(ship, [parseInt(currentX), parseInt(currentY)]);
                         }
-                        alert(error);
+                        popUpMessage('Error', error.message);
                     }
                 });
             });
@@ -216,7 +217,7 @@ export default async function placeShip() {
                 document.body.innerHTML = '';
                 resolve(playerGameboard);
             } else {
-                alert('You must place all the ships on the gameboard!');
+                popUpMessage('Notice', 'You must place all the ships on the gameboard!');
             }
         });
     });
