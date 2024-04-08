@@ -36,14 +36,18 @@ export default async function runGame() {
             });
     }
 
-    let winner = await startGame(player1, player2);
+    popUpMessage('Start Game', `Press "Continue" to Start Game`);
+    const continueButton = document.querySelector('.close');
+    continueButton.addEventListener('click', async () => {
+        let winner = await startGame(player1, player2);
 
-    popUpMessage('Game Ended', `${winner.name} won!`);
-    const closeButton = document.querySelector('.close');
-    await new Promise((resolve) => {
-        closeButton.addEventListener('click', () => {
-            location.reload();
-            resolve();
+        popUpMessage('Game Ended', `${winner.name} won!`);
+        const closeButton = document.querySelector('.close');
+        await new Promise((resolve) => {
+            closeButton.addEventListener('click', () => {
+                location.reload();
+                resolve();
+            });
         });
     });
 }
