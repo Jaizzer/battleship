@@ -34,9 +34,5 @@ export default function createGameboardForDOM(gameboard, isVisible) {
         }
     }
 
-    // Configure the grid sizing of the gameboard.
-    gameboardDiv.style.gridTemplateRows = `repeat(${gameboard.grid.length}, 50px)`;
-    gameboardDiv.style.gridTemplateColumns = `repeat(${gameboard.grid.length}, 50px)`;
-
     return gameboardDiv;
 }
